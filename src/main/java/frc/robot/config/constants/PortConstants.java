@@ -52,4 +52,14 @@ public static final class Controller {
     public static final String CANIVORE_NAME = "Drivetrain";
 
   }
+
+  public static final class Elevator {
+    public static final int ELEVATOR_MASTER = 0;
+    public static final int ELEVATOR_FOLLOWER = 0;
+    public static final double MAX_VELOCITY = 0;
+    public static final double MAX_ACCELERATION = 0;
+    public static final double BOTTOM_LIMIT = 0;
+    public static final double TOP_LIMIT = 0;
+  }
+
 }
