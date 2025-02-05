@@ -11,9 +11,7 @@ public class ToTag  extends Command {
 
     private Drivetrain drivetrain;
     private Vision vision;
-
     public int tagNumber;
-    
     public ToTag (int tagNumber) {
         this.tagNumber = tagNumber;
 

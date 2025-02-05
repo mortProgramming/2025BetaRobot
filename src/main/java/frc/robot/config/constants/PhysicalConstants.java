@@ -27,4 +27,9 @@ public final class PhysicalConstants {
 		public static final double ROBOT_MOMENT_OF_INERTIA = 0;
 		public static final double DRIVE_MOTOR_CURRENT_LIMIT = 0;
     }
+	public final static class Elevator(){
+		public static final int TOP_POSITION=0;
+		public static final int MIDDLE_POSITION=0;
+		public static final int FLOOR_POSITION=0;
+	}
 }

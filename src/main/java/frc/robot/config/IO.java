@@ -3,7 +3,7 @@ package frc.robot.config;
 import frc.robot.commands.actions.drivetrain.Drive;
 import frc.robot.subsystems.Drivetrain;
 import static frc.robot.config.Inputs.*;
-
+import frc.robot.subsystems.Elevator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -15,9 +15,10 @@ import static frc.robot.config.constants.PhysicalConstants.Drivetrain.*;
 public class IO {
 
 	private static Drivetrain drivetrain;
-
+  private static Elevator elevator;
     public static void init() {
 		drivetrain = Drivetrain.getInstance();
+    elevator = Elevator.getInstance();
     }
 
     public static void configure() {
@@ -27,9 +28,9 @@ public class IO {
 		  drivetrain.setDefaultCommand(
 			  new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
       );
-        // drivetrain.setDefaultCommand(
-        //     new Drive(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve)
-        // );
+         drivetrain.setDefaultCommand(
+             new Drive(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve)
+         );
 
       joystick.button(0).whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
 

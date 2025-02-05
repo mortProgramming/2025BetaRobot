@@ -31,20 +31,20 @@ public static final class Controller {
   }
   
   public static final class Drivetrain {
-    public static final int FRONT_LEFT_DRIVE_MOTOR = 0;
-    public static final int FRONT_LEFT_STEER_MOTOR = 0;
+    public static final int FRONT_LEFT_DRIVE_MOTOR = 8;
+    public static final int FRONT_LEFT_STEER_MOTOR = 7;
     public static final int FRONT_LEFT_ENCODER = 0;
 
-    public static final int FRONT_RIGHT_DRIVE_MOTOR = 0;
-    public static final int FRONT_RIGHT_STEER_MOTOR = 0;
+    public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
+    public static final int FRONT_RIGHT_STEER_MOTOR = 1;
     public static final int FRONT_RIGHT_ENCODER = 0;
 
-    public static final int BACK_LEFT_DRIVE_MOTOR = 0;
-    public static final int BACK_LEFT_STEER_MOTOR = 0;
+    public static final int BACK_LEFT_DRIVE_MOTOR = 5;
+    public static final int BACK_LEFT_STEER_MOTOR = 6;
     public static final int BACK_LEFT_ENCODER = 0;
 
-    public static final int BACK_RIGHT_DRIVE_MOTOR = 0;
-    public static final int BACK_RIGHT_STEER_MOTOR = 0;
+    public static final int BACK_RIGHT_DRIVE_MOTOR = 4;
+    public static final int BACK_RIGHT_STEER_MOTOR = 3;
     public static final int BACK_RIGHT_ENCODER = 0;
 
     public static final int IMU_ID = 0;
@@ -58,8 +58,12 @@ public static final class Controller {
     public static final int ELEVATOR_FOLLOWER = 0;
     public static final double MAX_VELOCITY = 0;
     public static final double MAX_ACCELERATION = 0;
+    //The bottom & top limits are for position
     public static final double BOTTOM_LIMIT = 0;
     public static final double TOP_LIMIT = 0;
+  }
+  public static final class Servo{
+    public static final int SERVO = 0;
   }
 
 }

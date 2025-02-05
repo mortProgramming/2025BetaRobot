@@ -12,7 +12,7 @@ public final class PIDConstants {
 		public static final double AUTON_ROTATION_KI = 0;
 		public static final double AUTON_ROTATION_KD = 0;
     }
-	public final class Elevator{
+	public final class ElevatorPID{
 		public static final double KP = 0;
 		public static final double KI = 0;
 		public static final double KD = 0;
@@ -20,5 +20,10 @@ public final class PIDConstants {
 		public static final double KG = 0;
 		public static final double KV = 0;
 		public static final double KA = 0;
+        
+		// public void setElevatorPosition(double targetPosition) {
+            
+        // }
+		
 	}
 }

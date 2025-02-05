@@ -1,21 +1,31 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
+import static frc.robot.config.constants.PIDConstants.ElevatorPID.KA;
+import static frc.robot.config.constants.PIDConstants.ElevatorPID.KD;
+import static frc.robot.config.constants.PIDConstants.ElevatorPID.KG;
+import static frc.robot.config.constants.PIDConstants.ElevatorPID.KI;
+import static frc.robot.config.constants.PIDConstants.ElevatorPID.KP;
+import static frc.robot.config.constants.PIDConstants.ElevatorPID.KS;
+import static frc.robot.config.constants.PIDConstants.ElevatorPID.KV;
+import static frc.robot.config.constants.PortConstants.Elevator.BOTTOM_LIMIT;
+import static frc.robot.config.constants.PortConstants.Elevator.ELEVATOR_FOLLOWER;
+import static frc.robot.config.constants.PortConstants.Elevator.ELEVATOR_MASTER;
+import static frc.robot.config.constants.PortConstants.Elevator.MAX_ACCELERATION;
+import static frc.robot.config.constants.PortConstants.Elevator.MAX_VELOCITY;
+
 import com.revrobotics.spark.SparkBase;
-import com.revrobotics.spark.config.SoftLimitConfig;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
+
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.config.constants.PortConstants.Elevator.*;
-import static frc.robot.config.constants.PIDConstants.Elevator.*;
-import com.revrobotics.spark.config.SparkBaseConfig;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkBase.PersistMode;
 
 public class Elevator extends SubsystemBase{
     private static Elevator elevator;
@@ -45,7 +55,7 @@ public class Elevator extends SubsystemBase{
 
         driveNeoMaster.configure(driveConfigureFollower, resetMode, persistMode);
         driveNeoFollower.configure(driveConfigureFollower, resetMode, persistMode);
-        // driveNeoMaster.restoreFactoryDefaults();1
+        // driveNeoMaster.restoreFactoryDefaults();
         // driveNeoFollower.restoreFactoryDefaults();
 
         // driveNeoMaster.setIdleMode(IdleMode.kBrake);
@@ -93,6 +103,10 @@ public class Elevator extends SubsystemBase{
     }
     public void setPosition(double setpoint){
         driveNeoMaster.setVoltage(feedforward.calculate(0) + positionController.calculate(driveNeoMaster.getEncoder().getPosition(), setpoint));
+    }
+    //Target position is in inches
+    public void setElevatorPosition(double targetPosition){
+        // motorsSpeed= controller.calculate(targetPosition, getPosition()) + feedforward.calculate(getVelocity)
     }
     public void periodic(){
         SmartDashboard.putNumber("Elevator Encoder", getPosition());
