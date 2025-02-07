@@ -63,7 +63,7 @@ public static final class Controller {
     public static final double TOP_LIMIT = 0;
   }
   public static final class Servo{
-    public static final int SERVO = 0;
+    public static final int servoPort = 0;
   }
 
 }

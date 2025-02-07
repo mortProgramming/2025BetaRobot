@@ -9,16 +9,28 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+
 
 import static frc.robot.config.constants.PhysicalConstants.Drivetrain.*;
 
 public class IO {
+  private Alliance defaultAlliance = Alliance.Blue;
+  private static CommandJoystick joystick;
+  private static CommandJoystick throttle;
+  private static CommandXboxController xboxController;
+  private static DoubleSupplier zeroSupplier = new DoubleSupplier();
+  private static Drivetrain drivetrain;
 
-	private static Drivetrain drivetrain;
-  private static Elevator elevator;
-    public static void init() {
-		drivetrain = Drivetrain.getInstance();
-    elevator = Elevator.getInstance();
+  public dobule getAsDouble(){
+    return 0.0;
+  }
+  public static void init() {
+    //Need to replace JOYSTICK, THROTTLE, and XBOX_CONTROLLER with port numbers
+	  joystick = new CommandJoystick(JOYSTICK);
+    throttle = new CommandJoystick(THROTTLE);
+    xboxController = new CommandXboxController(XBOX_CONTROLLER);
     }
 
     public static void configure() {
