@@ -33,19 +33,19 @@ public static final class Controller {
   public static final class Drivetrain {
     public static final int FRONT_LEFT_DRIVE_MOTOR = 8;
     public static final int FRONT_LEFT_STEER_MOTOR = 7;
-    public static final int FRONT_LEFT_ENCODER = 0;
+    public static final int FRONT_LEFT_ENCODER = 38;
 
     public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
     public static final int FRONT_RIGHT_STEER_MOTOR = 1;
-    public static final int FRONT_RIGHT_ENCODER = 0;
+    public static final int FRONT_RIGHT_ENCODER = 35;
 
-    public static final int BACK_LEFT_DRIVE_MOTOR = 5;
-    public static final int BACK_LEFT_STEER_MOTOR = 6;
-    public static final int BACK_LEFT_ENCODER = 0;
+    public static final int BACK_LEFT_DRIVE_MOTOR = 6;
+    public static final int BACK_LEFT_STEER_MOTOR = 5;
+    public static final int BACK_LEFT_ENCODER = 37;
 
     public static final int BACK_RIGHT_DRIVE_MOTOR = 4;
     public static final int BACK_RIGHT_STEER_MOTOR = 3;
-    public static final int BACK_RIGHT_ENCODER = 0;
+    public static final int BACK_RIGHT_ENCODER = 36;
 
     public static final int IMU_ID = 0;
 

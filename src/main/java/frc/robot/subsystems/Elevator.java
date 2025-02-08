@@ -52,7 +52,7 @@ public class Elevator extends SubsystemBase{
         
         SparkBase.ResetMode resetMode = ResetMode.kNoResetSafeParameters;
         SparkBase.PersistMode persistMode = PersistMode.kNoPersistParameters;
-
+        //Why is driveNeoMaster.configure set to configure to the follower?
         driveNeoMaster.configure(driveConfigureFollower, resetMode, persistMode);
         driveNeoFollower.configure(driveConfigureFollower, resetMode, persistMode);
         // driveNeoMaster.restoreFactoryDefaults();
