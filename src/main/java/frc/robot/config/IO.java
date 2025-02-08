@@ -23,7 +23,7 @@ public class IO {
   private static DoubleSupplier zeroSupplier = new DoubleSupplier();
   private static Drivetrain drivetrain;
 
-  public dobule getAsDouble(){
+  public double getAsDouble(){
     return 0.0;
   }
   public static void init() {
@@ -31,24 +31,15 @@ public class IO {
 	  joystick = new CommandJoystick(JOYSTICK);
     throttle = new CommandJoystick(THROTTLE);
     xboxController = new CommandXboxController(XBOX_CONTROLLER);
+    drivetrain= Drivetrain.getInstance();
     }
 
     public static void configure() {
-      init();
-      Inputs.init();
 
 		  drivetrain.setDefaultCommand(
-			  new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
+        new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
       );
-         drivetrain.setDefaultCommand(
-             new Drive(Inputs::getLeftControllerXSwerve, Inputs::getLeftControllerYSwerve, Inputs::getRightControllerXSwerve)
-         );
-
-      joystick.button(0).whileTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
-
-      joystick.button(1).whileTrue(new InstantCommand(() -> drivetrain.getSwerveDrive().resetPosition(
-        new Pose2d(0, 0, Rotation2d.fromDegrees(0))
-      )));
+        new joystick.button(2).whileTrue(new InstantCommand(() -> drvietrain.setGyroscopeZero(0)));
     }
 
     public static Boolean getIsBlue () {
