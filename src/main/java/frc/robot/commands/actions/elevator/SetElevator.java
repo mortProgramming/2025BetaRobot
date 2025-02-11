@@ -6,11 +6,9 @@ import frc.robot.config.constants.PhysicalConstants;
 import frc.robot.config.constants.PhysicalConstants.ElevatorConstants;
 
 public class SetElevator extends SequentialCommandGroup {
-    //public static double FLOOR_POSITION = 0;
     public SetElevator(double elevatorSetpoint){
         addCommands(new SetElevator(elevatorSetpoint));
     }
-    //Need to find a way to import constants from PhysicalConstants & find out what elevatorSetpoint is because I forgot
     public final static SetElevator Level_2(){
         return new SetElevator(PhysicalConstants.ElevatorConstants.L2);
     }

@@ -16,6 +16,8 @@ public final class PortConstants {
 public static final class Controller {
     public static final int JOYSTICK = 0;
     public static final int CONTROLLER = 1;
+    public static final int XBOX_CONTROLLER = 0;
+    public static final int THROTTLE = 0;
 
     public static final int JOYSTICK_X_CHANNEL = 0;
     public static final int JOYSTICK_Y_CHANNEL = 1;
@@ -65,5 +67,7 @@ public static final class Controller {
   public static final class Servo{
     public static final int servoPort = 0;
   }
-
+  public static final class CoralCorral{
+    public static final int sparkMaxId=0;
+  }
 }

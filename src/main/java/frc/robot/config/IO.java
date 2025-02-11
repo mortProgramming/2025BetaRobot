@@ -14,7 +14,17 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj.Servo;
 import static frc.robot.config.constants.PhysicalConstants.Drivetrain.*;
+import static frc.robot.config.constants.PortConstants.Controller.*;
 
+import frc.robot.commands.actions.CoralCorral.Gate.closeCoralGate;
+import frc.robot.commands.actions.CoralCorral.Gate.openCoralGate;
+import frc.robot.commands.actions.CoralCorral.Gate.setCoralCorral;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.actions.CoralCorral.Gate.closeCoralGate;
+import frc.robot.commands.actions.CoralCorral.Gate.openCoralGate;
+import frc.robot.commands.actions.elevator.SetElevator;
+import frc.robot.commands.actions.elevator.moveElevator;
+import frc.robot.commands.actions.CoralCorral.Gate.*;
 public class IO {
   private Alliance defaultAlliance = Alliance.Blue;
   private static CommandJoystick joystick;
@@ -41,13 +51,32 @@ public class IO {
 		  drivetrain.setDefaultCommand(
         new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
       );
-      //   new joystick.button(2).whileTrue(new InstantCommand(() -> drvietrain.setGyroscopeZero(0)));
-      // servo.setDefaultCommand(
-      //   new InstantCommand(() -> servo.setAngle(0))
-      // );
-      // elevator.setDefaultCommand(
-      //   new InstantCommand(() -> elevator.setElevatorSpeed(0))
-      // );
+      joystick.button(0).onTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
+
+      //Something is wrong with either the imports or the methods for opening & closing the coral gate
+      //Also need treplace the a's with correct buttons when Endeffector is assigned
+      //Coral Gate Automatic Control
+      // xboxController.a().onTrue(new openCoralGate().execute());
+      // xboxController.a().onTrue(new closeCoralGate().execute());
+      //Coral Corral automatic control
+      xboxController.a().onTrue(new setCoralCorral(0).reef());
+      xboxController.a().onTrue(new setCoralCorral(0).coral());
+      //Elevator automatic control
+      xboxController.a().onTrue(new SetElevator(0).Level_2());
+      xboxController.a().onTrue(new SetElevator(0).Level_3());
+      xboxController.a().onTrue(new SetElevator(0).Level_4());
+      xboxController.a().onTrue(new SetElevator(0).Level_Coral());
+      //Coral Corral manual control
+      (xboxController.getRightY()>0.25).whileTrue(moveCoralCorral(0.25));
+      (xboxController.getRightY()>0.5).whileTrue(moveCoralCorral(0.5));
+      (xboxController.getRightY()>-0.25).whileTrue(moveCoralCorral(-0.25));
+      (xboxController.getRightY()>-0.5).whileTrue(moveCoralCorral(-0.5));
+      //Elevator manual control
+      (xboxController.getLeftY()>0.25).whileTrue(moveElevator(0.25));
+      (xboxController.getLeftY()>0.5).whileTrue(moveElevator(0.5));
+      (xboxController.getLeftY()>-0.25).whileTrue(moveElevator(-0.25));
+      (xboxController.getLeftY()>-0.5).whileTrue(moveElevator(-0.5));
+
     }
 
     public static Boolean getIsBlue () {
