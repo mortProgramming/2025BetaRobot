@@ -2,21 +2,32 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.Servo;
 import static frc.robot.config.constants.PortConstants.Servo.*;
+import static frc.robot.config.constants.PhysicalConstants.servoConstants.*;
+
+//The servo starts at 1/8th of an inch & ends at 2 1/4th of an inch
+//For this, we need the servo to extend to a total of 1/2th of an inch
 public class CoralGate extends SubsystemBase{
     public static CoralGate coralGate; 
     public Servo servo;
-    public double closedSetpoint;
-    public double openSetpoint;
     public CoralGate(){
         servo=new Servo(servoPort);
-        closedSetpoint=0;
-        openSetpoint=45;
+    }
+    public void initialize(){
+        coralGate = new CoralGate();
+        servo.setPosition(startSetpoint);
+    }
+    public static CoralGate getInstance(){
+        if (coralGate == null){
+            coralGate = new CoralGate();
+            return coralGate;
+        }
+        return coralGate;
     }
     public void open(){
-        servo.setAngle(openSetpoint);
+        servo.setPosition(openSetpoint);
     }
     public void close(){
-        servo.setAngle(closedSetpoint);
+        servo.setPosition(closedSetpoint);
     }
 
 }

@@ -66,6 +66,7 @@ public static final class Controller {
   }
   public static final class Servo{
     public static final int servoPort = 0;
+    public static final int servoPort2 = 0;
   }
   public static final class CoralCorral{
     public static final int sparkMaxId=0;

@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -23,8 +24,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.actions.CoralCorral.Gate.closeCoralGate;
 import frc.robot.commands.actions.CoralCorral.Gate.openCoralGate;
 import frc.robot.commands.actions.elevator.SetElevator;
+import frc.robot.commands.actions.elevator.jamElevator;
 import frc.robot.commands.actions.elevator.moveElevator;
 import frc.robot.commands.actions.CoralCorral.Gate.*;
+import frc.robot.commands.actions.CoralCorral.Gate.changeCoralGate;
 public class IO {
   private Alliance defaultAlliance = Alliance.Blue;
   private static CommandJoystick joystick;
@@ -34,7 +37,6 @@ public class IO {
   private static Drivetrain drivetrain;
   private static Elevator elevator;
   private static Servo servo;
-
   public double getAsDouble(){
     return 0.0;
   }
@@ -66,6 +68,8 @@ public class IO {
       xboxController.a().onTrue(new SetElevator(0).Level_3());
       xboxController.a().onTrue(new SetElevator(0).Level_4());
       xboxController.a().onTrue(new SetElevator(0).Level_Coral());
+      xboxController.a().onTrue(new jamElevator());
+    
       //Coral Corral manual control
       (xboxController.getRightY()>0.25).whileTrue(moveCoralCorral(0.25));
       (xboxController.getRightY()>0.5).whileTrue(moveCoralCorral(0.5));
@@ -76,7 +80,8 @@ public class IO {
       (xboxController.getLeftY()>0.5).whileTrue(moveElevator(0.5));
       (xboxController.getLeftY()>-0.25).whileTrue(moveElevator(-0.25));
       (xboxController.getLeftY()>-0.5).whileTrue(moveElevator(-0.5));
-
+      //Coral Gate manual control
+      (xboxController.a()).onTrue(changeCoralGate());
     }
 
     public static Boolean getIsBlue () {

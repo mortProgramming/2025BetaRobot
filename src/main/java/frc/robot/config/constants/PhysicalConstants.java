@@ -44,4 +44,11 @@ public final class PhysicalConstants {
 		public static final double reef=0;
 		public static final double coral=0;
 	}
+	public static final class servoConstants{
+		public static double closedSetpoint=0;
+        public static double jamSetpoint=0.75;
+		public static double openSetpoint=0.25;
+		public static double startSetpoint=0.5;
+		//Find openSetpoint 
+	}
 }
