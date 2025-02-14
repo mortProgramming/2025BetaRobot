@@ -17,8 +17,7 @@ import edu.wpi.first.wpilibj.Servo;
 import static frc.robot.config.constants.PhysicalConstants.Drivetrain.*;
 import static frc.robot.config.constants.PortConstants.Controller.*;
 
-import frc.robot.commands.actions.CoralCorral.Gate.closeCoralGate;
-import frc.robot.commands.actions.CoralCorral.Gate.openCoralGate;
+
 import frc.robot.commands.actions.CoralCorral.Gate.setCoralCorral;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -57,7 +56,7 @@ public class IO {
 
       //Also need to replace the a's with correct buttons when Endeffector is assigned
       //Coral Gate Automatic Control
-       xboxController.a().onTrue(new changeCoralGate());
+      xboxController.a().onTrue(new changeCoralGate());
       //Coral Corral automatic control
       xboxController.a().onTrue(new setCoralCorral(0).reef());
       xboxController.a().onTrue(new setCoralCorral(0).coral());
@@ -69,17 +68,18 @@ public class IO {
       xboxController.a().onTrue(new jamElevator());
     
       //Coral Corral manual control
-      /*(xboxController.getRightY()>0.25).whileTrue(new moveCoralCorral(0.25).moveCoralCorral());
-      (xboxController.getRightY()>0.5).whileTrue(new moveCoralCorral(0.5));
-      (xboxController.getRightY()>-0.25).whileTrue(new moveCoralCorral(-0.25));
-      (xboxController.getRightY()>-0.5).whileTrue(new moveCoralCorral(-0.5));
+      new Trigger(() -> xboxController.getRightY() > 0.25).whileTrue(new moveCoralCorral(0.25));
+      new Trigger(() -> xboxController.getRightY() > 0.5).whileTrue(new moveCoralCorral(0.5));
+      new Trigger(() -> xboxController.getRightY() > -0.25).whileTrue(new moveCoralCorral(-0.25));
+      new Trigger(() -> xboxController.getRightY() > -0.5).whileTrue(new moveCoralCorral(-0.5));
+      new Trigger(() -> xboxController.getRightY() >= -0.25 && xboxController.getRightY() <=0.25).whileTrue(new moveElevator(0));
+      
       //Elevator manual control
-      (xboxController.getLeftY()>0.25).whileTrue(new moveElevator(0.25));
-      (xboxController.getLeftY()>0.5).whileTrue(new moveElevator(0.5));
-      (xboxController.getLeftY()< -0.25).whileTrue(new moveElevator(-0.25));
-      (xboxController.getLeftY()< -0.5).whileTrue(new moveElevator(-0.5));
-      (xboxController.getLeftY() ).whileTrue(new moveElevator(0));
-      */
+      new Trigger(() -> xboxController.getLeftY() > 0.25).whileTrue(new moveElevator(0.25));
+      new Trigger(() -> xboxController.getLeftY() > 0.5).whileTrue(new moveElevator(0.5));
+      new Trigger(() -> xboxController.getLeftY() < -0.25).whileTrue(new moveElevator(-0.25));
+      new Trigger(() -> xboxController.getLeftY() < -0.5).whileTrue(new moveElevator(-0.5));
+      new Trigger(() -> xboxController.getLeftY() >= -0.25 && xboxController.getLeftY() <= 0.25).whileTrue(new moveElevator(0));  
     }
 
     public static Boolean getIsBlue () {

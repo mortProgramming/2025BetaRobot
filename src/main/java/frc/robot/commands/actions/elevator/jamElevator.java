@@ -13,9 +13,6 @@ public class jamElevator extends Command{
         addRequirements(elevatorBrake);
     }
     public void initialize(){
-    }
-    public void execute(){}
-    public void JamElevator(){
         if (ElevatorBrake.getIsJammed()){
             elevatorBrake.unJamElevator();
             setIsJammed(false);
@@ -24,9 +21,17 @@ public class jamElevator extends Command{
             elevatorBrake.jamElevator();
             setIsJammed(true);
         }
+    }
+    public void execute(){
 
     }
-    public void end(boolean interrupted){}
+    public void JamElevator(){
+
+    }
+    public void end(boolean interrupted){
+
+    }
+    
     public boolean isFinished(){
         return false;
     }

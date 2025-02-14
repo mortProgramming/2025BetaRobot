@@ -4,6 +4,7 @@ import static frc.robot.subsystems.CoralGate.*;
 import edu.wpi.first.wpilibj2.command.Command;
 public class changeCoralGate extends Command{
     private CoralGate coralGate;
+    
     public void initialize(){
         if(!getIsClosed()){
             coralGate.close();
@@ -16,7 +17,7 @@ public class changeCoralGate extends Command{
     }
     public void execute(){}
     public void changeCoralGate(){
-        coralGate=this.coralGate();
+        coralGate=coralGate.getInstance();
     }
     public void end(boolean interrupted){}
     public boolean isFinished(){
