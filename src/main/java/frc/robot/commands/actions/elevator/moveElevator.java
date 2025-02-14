@@ -9,7 +9,10 @@ public class moveElevator extends Command{
         this.incrementPerSecond = incrementPerSecond;
         addRequirements(elevator);
     }
-    public void initialize(){}
+    public void initialize(){
+
+    }
+    
     public void execute(){
         double increment=incrementPerSecond*0.02;
         //getPosition will cause a bug. Need to fix later by implementing a method to elevator to get position in inches

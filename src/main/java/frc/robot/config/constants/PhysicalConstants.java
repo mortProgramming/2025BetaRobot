@@ -47,7 +47,7 @@ public final class PhysicalConstants {
 	public static final class servoConstants{
 		public static double closedSetpoint=0;
         public static double jamSetpoint=0.75;
-		public static double openSetpoint=0.25;
+		public static double openSetpoint=0.18;
 		public static double startSetpoint=0.5;
 		//Find openSetpoint 
 	}
