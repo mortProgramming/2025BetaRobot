@@ -1,7 +1,6 @@
 package frc.robot.commands.actions.elevator;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.subsystems.Elevator;
 import frc.robot.config.constants.PhysicalConstants;
 import frc.robot.config.constants.PhysicalConstants.ElevatorConstants;
 

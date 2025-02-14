@@ -7,6 +7,7 @@ import static frc.robot.config.constants.PhysicalConstants.servoConstants.*;
 public class ElevatorBrake extends SubsystemBase{
     public Servo servo;
     public static ElevatorBrake elevatorBrake;
+    public static boolean isJammed=false;
     public ElevatorBrake(){
         servo=new Servo(servoPort2);
     }
@@ -27,4 +28,10 @@ public class ElevatorBrake extends SubsystemBase{
     public void unJamElevator(){
         servo.setPosition(closedSetpoint);
     }
-}
+    public static boolean getIsJammed(){
+        return isJammed;
+    }
+    public static void setIsJammed(boolean jammed){
+        isJammed=jammed;
+    }
+}   

@@ -1,33 +1,28 @@
 package frc.robot.commands.actions.elevator;
+import frc.robot.config.constants.PortConstants.Elevator;
 import frc.robot.subsystems.ElevatorBrake;
-import frc.robot.subsystems.CoralGate;
+import edu.wpi.first.wpilibj2.command.Command;
+import static frc.robot.subsystems.ElevatorBrake.*;
 
-public class jamElevator {
+public class jamElevator extends Command{
     
     private ElevatorBrake elevatorBrake;
-    private boolean isJammed=false;
-    public void initialize(){
-        isJammed=false;
+
+    public jamElevator() {
         elevatorBrake = ElevatorBrake.getInstance();
+        addRequirements(elevatorBrake);
     }
-    public void execute(){
-        if (isJammed){
+    public void initialize(){
+    }
+    public void execute(){}
+    public void JamElevator(){
+        if (ElevatorBrake.getIsJammed()){
             elevatorBrake.unJamElevator();
-            isJammed=false;
+            setIsJammed(false);
         }
         else{
             elevatorBrake.jamElevator();
-            isJammed=true;
-        }
-    }
-    public jamElevator JamElevator(){
-        if (isJammed){
-            return elevatorBrake.unJamElevator();
-            isJammed=false;
-        }
-        else{
-            return elevatorBrake.jamElevator();
-            isJammed=true;
+            setIsJammed(true);
         }
 
     }

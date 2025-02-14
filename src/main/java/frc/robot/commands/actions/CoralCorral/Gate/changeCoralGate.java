@@ -1,22 +1,22 @@
 package frc.robot.commands.actions.CoralCorral.Gate;
 import frc.robot.subsystems.CoralGate;
+import static frc.robot.subsystems.CoralGate.*;
 import edu.wpi.first.wpilibj2.command.Command;
 public class changeCoralGate extends Command{
-    private boolean isOpen;
     private CoralGate coralGate;
     public void initialize(){
-        isOpen=false;
-        coralGate.close();
-    }
-    public void execute(){
-        if(isOpen){
+        if(!getIsClosed()){
             coralGate.close();
-            isOpen=false;
+            setIsClosed(true);
         }
         else{
             coralGate.open();
-            isOpen=true;
+            setIsClosed(false);
         }
+    }
+    public void execute(){}
+    public void changeCoralGate(){
+        coralGate=this.coralGate();
     }
     public void end(boolean interrupted){}
     public boolean isFinished(){

@@ -7,7 +7,8 @@ import static frc.robot.config.constants.PhysicalConstants.servoConstants.*;
 //The servo starts at 1/8th of an inch & ends at 2 1/4th of an inch
 //For this, we need the servo to extend to a total of 1/2th of an inch
 public class CoralGate extends SubsystemBase{
-    public static CoralGate coralGate; 
+    public static CoralGate coralGate;
+    public static boolean isClosed=false;
     public Servo servo;
     public CoralGate(){
         servo=new Servo(servoPort);
@@ -28,6 +29,12 @@ public class CoralGate extends SubsystemBase{
     }
     public void close(){
         servo.setPosition(closedSetpoint);
+    }
+    public static boolean getIsClosed(){
+        return isClosed;
+    }
+    public static void setIsClosed(boolean closed){
+        isClosed=closed;
     }
 
 }
