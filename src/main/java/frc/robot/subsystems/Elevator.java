@@ -41,7 +41,7 @@ public class Elevator extends SubsystemBase{
     private ElevatorFeedforward feedforward;
 
     private double setpoint;
-    
+    public static int elevation=0; /*Used for setPosition */
     private Elevator(){
         driveNeoMaster = new SparkMax(ELEVATOR_MASTER, MotorType.kBrushless);
         driveNeoFollower = new SparkMax(ELEVATOR_FOLLOWER, MotorType.kBrushless);

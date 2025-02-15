@@ -8,7 +8,7 @@ import static frc.robot.config.constants.PhysicalConstants.servoConstants.*;
 //For this, we need the servo to extend to a total of 1/2th of an inch
 public class CoralGate extends SubsystemBase{
     public static CoralGate coralGate;
-    public static boolean isClosed=false;
+    public static boolean isClosed=true;
     public Servo servo;
     public CoralGate(){
         servo=new Servo(servoPort);
