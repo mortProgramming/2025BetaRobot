@@ -56,8 +56,9 @@ public static final class Controller {
   }
 
   public static final class Elevator {
-    public static final int ELEVATOR_MASTER = 0;
-    public static final int ELEVATOR_FOLLOWER = 0;
+    //Might need to swap master & follower id
+    public static final int ELEVATOR_MASTER =11;
+    public static final int ELEVATOR_FOLLOWER = 10;
     public static final double MAX_VELOCITY = 0;
     public static final double MAX_ACCELERATION = 0;
     //The bottom & top limits are for position
@@ -69,6 +70,6 @@ public static final class Controller {
     public static final int servoPort2 = 0;
   }
   public static final class CoralCorral{
-    public static final int sparkMaxId=0;
+    public static final int sparkMaxId=9;
   }
 }

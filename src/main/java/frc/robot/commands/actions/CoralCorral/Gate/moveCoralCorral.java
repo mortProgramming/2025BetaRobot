@@ -6,7 +6,7 @@ public class moveCoralCorral extends Command {
     private CoralCorral coralCorral;
     private double increment;
     public moveCoralCorral(double increment){
-        coralCorral = coralCorral.getInstance();
+        coralCorral = CoralCorral.getInstance();
         this.increment = increment;
         addRequirements(coralCorral);
     }

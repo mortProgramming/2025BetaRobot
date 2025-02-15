@@ -28,6 +28,7 @@ public class CoralCorral extends SubsystemBase  {
     private ProfiledPIDController positionController;
     private double setpoint;
     private SimpleMotorFeedforward feedforward;
+    public static int positionLevel=1; /*Not actual position, used for  set angles*/
     private CoralCorral(){
         driveNeoMaster = new SparkMax(sparkMaxId, MotorType.kBrushless);
         driveConfigMaster = new SparkMaxConfig();
@@ -83,10 +84,16 @@ public class CoralCorral extends SubsystemBase  {
         driveNeoMaster.setVoltage(positionController.calculate(getPosition(), setpoint));
         setPosition(setpoint);
     }
-    public  CoralCorral getInstance(){
+    public static CoralCorral getInstance(){
         if (coralCorral == null){
             coralCorral = new CoralCorral();
         }
         return coralCorral;
+    }
+    public static int getPositionLevel(){
+        return positionLevel;
+    }
+    public static void setPositionLevel(int newPositionLevel){
+        positionLevel=newPositionLevel;
     }
 }
