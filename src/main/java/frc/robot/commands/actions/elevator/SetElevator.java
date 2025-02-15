@@ -1,12 +1,12 @@
 package frc.robot.commands.actions.elevator;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.config.constants.PhysicalConstants;
 import frc.robot.config.constants.PhysicalConstants.ElevatorConstants;
 
-public class SetElevator extends SequentialCommandGroup {
+public class SetElevator extends Command {
     public SetElevator(double elevatorSetpoint){
-        addCommands(new SetElevator(elevatorSetpoint));
+        (new SetElevator(elevatorSetpoint));
     }
     public final static SetElevator Level_2(){
         return new SetElevator(PhysicalConstants.ElevatorConstants.L2);
@@ -19,5 +19,8 @@ public class SetElevator extends SequentialCommandGroup {
     }
     public final static SetElevator Level_Coral(){
         return new SetElevator(PhysicalConstants.ElevatorConstants.Coral);
+    }
+    public SetElevator initialize(){
+
     }
 }
