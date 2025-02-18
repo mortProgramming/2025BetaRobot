@@ -4,6 +4,33 @@
 
 package frc.robot.subsystems;
 
+import static frc.robot.MORTlib.hardware.encoder.EncoderTypeEnum.CANCODER;
+import static frc.robot.MORTlib.hardware.imu.IMUTypeEnum.PIGEON2;
+import static frc.robot.MORTlib.hardware.motor.MotorTypeEnum.FALCON;
+import static frc.robot.MORTlib.subsystems.swerve.ModuleConfigEnum.MK4i_L3;
+import static frc.robot.config.constants.PhysicalConstants.Drivetrain.BACK_LEFT_OFFSET;
+import static frc.robot.config.constants.PhysicalConstants.Drivetrain.BACK_RIGHT_OFFSET;
+import static frc.robot.config.constants.PhysicalConstants.Drivetrain.DRIVETRAIN_TRACKWIDTH_METERS;
+import static frc.robot.config.constants.PhysicalConstants.Drivetrain.DRIVETRAIN_WHEELBASE_METERS;
+import static frc.robot.config.constants.PhysicalConstants.Drivetrain.FRONT_LEFT_OFFSET;
+import static frc.robot.config.constants.PhysicalConstants.Drivetrain.FRONT_RIGHT_OFFSET;
+import static frc.robot.config.constants.PortConstants.Drivetrain.BACK_LEFT_DRIVE_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.BACK_LEFT_ENCODER;
+import static frc.robot.config.constants.PortConstants.Drivetrain.BACK_LEFT_STEER_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.BACK_RIGHT_DRIVE_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.BACK_RIGHT_ENCODER;
+import static frc.robot.config.constants.PortConstants.Drivetrain.BACK_RIGHT_STEER_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.CANIVORE_NAME;
+import static frc.robot.config.constants.PortConstants.Drivetrain.FRONT_LEFT_DRIVE_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.FRONT_LEFT_ENCODER;
+import static frc.robot.config.constants.PortConstants.Drivetrain.FRONT_LEFT_STEER_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.FRONT_RIGHT_DRIVE_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.FRONT_RIGHT_ENCODER;
+import static frc.robot.config.constants.PortConstants.Drivetrain.FRONT_RIGHT_STEER_MOTOR;
+import static frc.robot.config.constants.PortConstants.Drivetrain.IMU_ID;
+
+import com.ctre.phoenix6.hardware.CANcoder;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -12,18 +39,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import static frc.robot.config.constants.PhysicalConstants.Drivetrain.*;
-import static frc.robot.config.constants.PortConstants.Drivetrain.*;
-import static frc.robot.MORTlib.hardware.encoder.EncoderTypeEnum.*;
-import static frc.robot.MORTlib.hardware.imu.IMUTypeEnum.*;
-import static frc.robot.MORTlib.hardware.motor.MotorTypeEnum.*;
-import static frc.robot.MORTlib.subsystems.swerve.ModuleConfigEnum.*;
-
-import frc.robot.config.IO;
 import frc.robot.MORTlib.hardware.imu.IMU;
 import frc.robot.MORTlib.subsystems.swerve.SwerveModule;
 import frc.robot.MORTlib.subsystems.swerve.swervedrives.OdometeredSwerveDrive;
+import frc.robot.config.IO;
 
 public class Drivetrain extends SubsystemBase {
   private static Drivetrain drivetrain;
@@ -139,8 +158,6 @@ public class Drivetrain extends SubsystemBase {
   public Command setGyroscopeZero(double angle) {
 		return new InstantCommand(() -> swerveDrive.zeroIMU(angle));
 	}
-
-
 
 	public ChassisSpeeds getChassisSpeeds() {
         return speeds;
