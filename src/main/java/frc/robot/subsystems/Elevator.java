@@ -113,5 +113,10 @@ public class Elevator extends SubsystemBase{
         SmartDashboard.putNumber("Elevator Encoder", getPosition());
         SmartDashboard.putNumber("elevator setpoint", setpoint);
     }
-    
+    public static int getElevation(){
+        return elevation;
+    }
+    public static void setElevation(int newElevation){
+        elevation=newElevation;
+    }
 }

@@ -40,7 +40,6 @@ public class IO {
     return 0.0;
   }
   public static void init() {
-    //Need to replace JOYSTICK, THROTTLE, and XBOX_CONTROLLER with port numbers
 	  joystick = new CommandJoystick(JOYSTICK);
     throttle = new CommandJoystick(THROTTLE);
     xboxController = new CommandXboxController(XBOX_CONTROLLER);
@@ -48,38 +47,41 @@ public class IO {
     }
 
     public static void configure() {
+      init();
+      Inputs.init();
+      
 
 		  drivetrain.setDefaultCommand(
         new Drive(Inputs::getJoystickX, Inputs::getJoystickY, Inputs::getJoystickTwist)
       );
       joystick.button(0).onTrue(drivetrain.setGyroscopeZero(IMU_TO_ROBOT_FRONT_ANGLE));
 
-      //Also need to replace the a's with correct buttons when Endeffector is assigned
-      //Coral Gate Automatic Control
-      xboxController.a().onTrue(new changeCoralGate());
-      //Coral Corral automatic control
-      xboxController.a().onTrue(new setCoralCorral(0).reef());
-      xboxController.a().onTrue(new setCoralCorral(0).coral());
-      //Elevator automatic control
-      xboxController.a().onTrue(new SetElevator(0).Level_2());
-      xboxController.a().onTrue(new SetElevator(0).Level_3());
-      xboxController.a().onTrue(new SetElevator(0).Level_4());
-      xboxController.a().onTrue(new SetElevator(0).Level_Coral());
-      xboxController.a().onTrue(new jamElevator());
+      // //Also need to replace the a's with correct buttons when Endeffector is assigned
+      // //Coral Gate Automatic Control
+      // xboxController.a().onTrue(new changeCoralGate());
+      // //Coral Corral automatic control
+      // // xboxController.a().onTrue(new setCoralCorral(0).reef());
+      // // xboxController.a().onTrue(new setCoralCorral(0).coral());
+      // //Elevator automatic control
+      // xboxController.a().onTrue(new SetElevator(0).Level_2());
+      // xboxController.a().onTrue(new SetElevator(0).Level_3());
+      // xboxController.a().onTrue(new SetElevator(0).Level_4());
+      // xboxController.a().onTrue(new SetElevator(0).Level_Coral());
+      // xboxController.a().onTrue(new jamElevator());
     
-      //Coral Corral manual control
-      new Trigger(() -> xboxController.getRightY() > 0.25).whileTrue(new moveCoralCorral(0.25));
-      new Trigger(() -> xboxController.getRightY() > 0.5).whileTrue(new moveCoralCorral(0.5));
-      new Trigger(() -> xboxController.getRightY() > -0.25).whileTrue(new moveCoralCorral(-0.25));
-      new Trigger(() -> xboxController.getRightY() > -0.5).whileTrue(new moveCoralCorral(-0.5));
-      new Trigger(() -> xboxController.getRightY() >= -0.25 && xboxController.getRightY() <=0.25).whileTrue(new moveElevator(0));
+      // //Coral Corral manual control
+      // new Trigger(() -> xboxController.getRightY() > 0.25).whileTrue(new moveCoralCorral(0.25));
+      // new Trigger(() -> xboxController.getRightY() > 0.5).whileTrue(new moveCoralCorral(0.5));
+      // new Trigger(() -> xboxController.getRightY() > -0.25).whileTrue(new moveCoralCorral(-0.25));
+      // new Trigger(() -> xboxController.getRightY() > -0.5).whileTrue(new moveCoralCorral(-0.5));
+      // new Trigger(() -> xboxController.getRightY() >= -0.25 && xboxController.getRightY() <=0.25).whileTrue(new moveElevator(0));
       
-      //Elevator manual control
-      new Trigger(() -> xboxController.getLeftY() > 0.25).whileTrue(new moveElevator(0.25));
-      new Trigger(() -> xboxController.getLeftY() > 0.5).whileTrue(new moveElevator(0.5));
-      new Trigger(() -> xboxController.getLeftY() < -0.25).whileTrue(new moveElevator(-0.25));
-      new Trigger(() -> xboxController.getLeftY() < -0.5).whileTrue(new moveElevator(-0.5));
-      new Trigger(() -> xboxController.getLeftY() >= -0.25 && xboxController.getLeftY() <= 0.25).whileTrue(new moveElevator(0));  
+      // //Elevator manual control
+      // new Trigger(() -> xboxController.getLeftY() >= 0.25 || xboxController.getLeftY()<=0.25).whileTrue(new moveElevator(0.25));
+      // //new Trigger(() -> xboxController.getLeftY() > 0.5).whileTrue(new moveElevator(0.5));
+      // //new Trigger(() -> xboxController.getLeftY() < -0.25).whileTrue(new moveElevator(-0.25));
+      // //new Trigger(() -> xboxController.getLeftY() < -0.5).whileTrue(new moveElevator(-0.5));
+      // new Trigger(() -> xboxController.getLeftY() >= -0.25 && xboxController.getLeftY() <= 0.25).whileTrue(new moveElevator(0));  
     }
 
     public static Boolean getIsBlue () {

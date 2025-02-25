@@ -15,8 +15,8 @@ public class moveElevator extends Command{
     
     public void execute(){
         double increment=incrementPerSecond*0.02;
-        //getPosition will cause a bug. Need to fix later by implementing a method to elevator to get position in inches
-        elevator.setSetpoint(elevator.getPosition()+increment);
+        //getPosition might cause an error
+        elevator.setSpeed(increment);
         
     }
     public boolean isFinished(){

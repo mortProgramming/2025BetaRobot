@@ -13,10 +13,10 @@ package frc.robot.config.constants;
  * constants are needed, to reduce verbosity.
  */
 public final class PortConstants {
-public static final class Controller {
+  public static final class Controller {
     public static final int JOYSTICK = 0;
     public static final int CONTROLLER = 1;
-    public static final int XBOX_CONTROLLER = 0;
+    public static final int XBOX_CONTROLLER = 3;
     public static final int THROTTLE = 0;
 
     public static final int JOYSTICK_X_CHANNEL = 0;
@@ -51,13 +51,14 @@ public static final class Controller {
 
     public static final int IMU_ID = 0;
 
-    public static final String CANIVORE_NAME = "Drivetrain";
+    public static final String CANIVORE_NAME = "CANivore";
 
   }
 
   public static final class Elevator {
-    public static final int ELEVATOR_MASTER = 0;
-    public static final int ELEVATOR_FOLLOWER = 0;
+    //Might need to swap master & follower id
+    public static final int ELEVATOR_MASTER =11;
+    public static final int ELEVATOR_FOLLOWER = 10;
     public static final double MAX_VELOCITY = 0;
     public static final double MAX_ACCELERATION = 0;
     //The bottom & top limits are for position
@@ -69,6 +70,6 @@ public static final class Controller {
     public static final int servoPort2 = 0;
   }
   public static final class CoralCorral{
-    public static final int sparkMaxId = 0;
+    public static final int sparkMaxId=9;
   }
 }
