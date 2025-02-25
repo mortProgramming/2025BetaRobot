@@ -9,13 +9,12 @@ import static frc.robot.config.constants.PhysicalConstants.servoConstants.*;
 public class CoralGate extends SubsystemBase{
     public static CoralGate coralGate;
     public static boolean isClosed=true;
-    public Servo servo;
+    public static Servo servo;
     public CoralGate(){
         servo=new Servo(servoPort);
     }
     public void initialize(){
         coralGate = new CoralGate();
-        servo.setPosition(startSetpoint);
     }
     public static CoralGate getInstance(){
         if (coralGate == null){

@@ -32,42 +32,19 @@ public final class PortConstants {
     public static final double MIN_ROTATE = 0;
   }
   
-  public static final class Drivetrain {
-    public static final int FRONT_LEFT_DRIVE_MOTOR = 8;
-    public static final int FRONT_LEFT_STEER_MOTOR = 7;
-    public static final int FRONT_LEFT_ENCODER = 38;
-
-    public static final int FRONT_RIGHT_DRIVE_MOTOR = 2;
-    public static final int FRONT_RIGHT_STEER_MOTOR = 1;
-    public static final int FRONT_RIGHT_ENCODER = 35;
-
-    public static final int BACK_LEFT_DRIVE_MOTOR = 6;
-    public static final int BACK_LEFT_STEER_MOTOR = 5;
-    public static final int BACK_LEFT_ENCODER = 37;
-
-    public static final int BACK_RIGHT_DRIVE_MOTOR = 4;
-    public static final int BACK_RIGHT_STEER_MOTOR = 3;
-    public static final int BACK_RIGHT_ENCODER = 36;
-
-    public static final int IMU_ID = 0;
-
-    public static final String CANIVORE_NAME = "CANivore";
-
-  }
-
-  public static final class Elevator {
+    public static final class Elevator {
     //Might need to swap master & follower id
-    public static final int ELEVATOR_MASTER =11;
+    public static final int ELEVATOR_MASTER = 11;
     public static final int ELEVATOR_FOLLOWER = 10;
-    public static final double MAX_VELOCITY = 0;
-    public static final double MAX_ACCELERATION = 0;
+    public static final double MAX_VELOCITY = 25;
+    public static final double MAX_ACCELERATION = 300;
     //The bottom & top limits are for position
     public static final double BOTTOM_LIMIT = 0;
-    public static final double TOP_LIMIT = 0;
+    public static final double TOP_LIMIT = 2;
   }
   public static final class Servo{
-    public static final int servoPort = 0;
-    public static final int servoPort2 = 0;
+    public static final int servoPort = 8;
+    public static final int servoPort2 = 9;
   }
   public static final class CoralCorral{
     public static final int sparkMaxId=9;

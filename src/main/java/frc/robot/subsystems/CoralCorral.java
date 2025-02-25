@@ -57,6 +57,7 @@ public class CoralCorral extends SubsystemBase  {
     }
     public void setSpeed(double speed){
         driveNeoMaster.set(speed);
+        System.out.println("Speed: " + speed);
     }
     public boolean nearSetpoint(){
         return Math.abs(positionController.getPositionError()) < 0.1;
@@ -64,6 +65,7 @@ public class CoralCorral extends SubsystemBase  {
     public double getPosition(){
         return driveNeoMaster.getEncoder().getPosition();
     }
+
     public double getPositionAngle(){
         return -6.274 * (getPosition() + 9.8);
     }
@@ -81,8 +83,8 @@ public class CoralCorral extends SubsystemBase  {
     public void periodic(){
         SmartDashboard.putNumber("Coral Corral Position", getPosition());
         SmartDashboard.putNumber("Coral Corral Setpoint", setpoint);
-        driveNeoMaster.setVoltage(positionController.calculate(getPosition(), setpoint));
-        setPosition(setpoint);
+        // driveNeoMaster.setVoltage(positionController.calculate(getPosition(), setpoint));
+        // setPosition(setpoint);
     }
     public static CoralCorral getInstance(){
         if (coralCorral == null){
@@ -94,6 +96,7 @@ public class CoralCorral extends SubsystemBase  {
         return positionLevel;
     }
     public static void setPositionLevel(int newPositionLevel){
-        positionLevel=newPositionLevel;
+        positionLevel = newPositionLevel;
     }
 }
+

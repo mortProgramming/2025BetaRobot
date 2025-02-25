@@ -5,7 +5,7 @@ import static frc.robot.config.constants.PortConstants.Servo.*;
 import static frc.robot.config.constants.PhysicalConstants.servoConstants.*;
 //For the elevator brake, we need to extend to full length to lock the elevator
 public class ElevatorBrake extends SubsystemBase{
-    public Servo servo;
+    public static Servo servo;
     public static ElevatorBrake elevatorBrake;
     public static boolean isJammed=false;
     public ElevatorBrake(){
@@ -13,7 +13,6 @@ public class ElevatorBrake extends SubsystemBase{
     }
     public void initialize(){
         elevatorBrake = new ElevatorBrake();
-        servo.setPosition(closedSetpoint);
     }
     public static ElevatorBrake getInstance(){
         if (elevatorBrake == null){
@@ -26,7 +25,7 @@ public class ElevatorBrake extends SubsystemBase{
         servo.setPosition(jamSetpoint);
     }
     public void unJamElevator(){
-        servo.setPosition(closedSetpoint);
+        servo.setPosition(unJamSetpoint);
     }
     public static boolean getIsJammed(){
         return isJammed;
