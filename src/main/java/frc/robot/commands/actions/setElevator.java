@@ -21,14 +21,14 @@ public class setElevator extends Command{
 
     }
     
-    public void execute(double increment){
-        elevator.setMotorPercent(-elevator.getPIDController().calculate(elevator.getPosition(), targetPosition));
+    public void execute(){
+        elevator.setPosition(-elevator.getPIDController().calculate(elevator.getPosition(), targetPosition));
     }
     public boolean isFinished(){
         return false;
     }
     public void end(boolean interrupted){
-        elevator.setMotorPercent(0.2);
+        elevator.setMotorPercent(0.3);
     }
     public static Command L1(){
         return new setElevator(L1);
