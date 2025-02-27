@@ -8,7 +8,7 @@ public final class PhysicalConstants{
 		public static final double L1=0;
 		public static final double L2=0;
 		public static final double L3=0;
-		public static final double L4=50;
+		public static final double L4=30;
 		public static final double Coral=0;
 		public static final double motorVoltage=12.0;
 		public static final double speedFactor=(0.5);
