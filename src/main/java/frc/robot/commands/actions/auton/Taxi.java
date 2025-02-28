@@ -17,7 +17,14 @@ public class Taxi extends SequentialCommandGroup{
     // }
     public Taxi(){
         // addCommands(new SequentialCommandGroup(new TimedDrive(time,x,y,omega)));
-        addCommands(new SequentialCommandGroup(new TimedDrive(0,0,0,0)));
+        addCommands(
+            new SequentialCommandGroup(
+                new TimedDrive(3,-0.5,0,0)
+
+
+            ) 
+
+        );
 
     }
 }
