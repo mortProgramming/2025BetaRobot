@@ -71,13 +71,15 @@ public class CoralCorral extends SubsystemBase  {
     }
     public void setPosition(double setpoint){
         double output = ((feedforward.calculate(0)+positionController.calculate(getPosition(), setpoint)) / MAX_VOLTAGE);
+        
         if (output >= 1){
             output=0.1;
         }
         else if (output <= -1){
             output=-0.1;
         }
-        SmartDashboard.putNumber("Coral Corral Output", output);
+        
+        // SmartDashboard.putNumber("Coral Corral Output", output);
         driveNeoMaster.set(output);
     }
     public void periodic(){
