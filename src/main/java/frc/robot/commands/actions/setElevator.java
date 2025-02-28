@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class setElevator extends Command{
     private Elevator elevator;
     private double targetPosition;
-    private PIDController positioncontroller = new PIDController(0., 0, 0);
+    private PIDController positioncontroller = new PIDController(0.04, 0, 0);
     public setElevator(double targetPosition){
         elevator = Elevator.getInstance();
         this.targetPosition = targetPosition;
