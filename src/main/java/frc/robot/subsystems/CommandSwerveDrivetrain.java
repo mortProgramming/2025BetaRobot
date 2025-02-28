@@ -287,4 +287,14 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
         return run(() -> this.setControl(requestSupplier.get()));
     }
+
+    public void drive(double x, double y, double omega) {
+        // Implement the logic to drive the robot using the given velocities.
+        // This might involve setting motor speeds or sending commands to the drivetrain.
+        SwerveRequest request = new SwerveRequest.FieldCentric()
+            .withVelocityX(x)
+            .withVelocityY(y)
+            .withRotationalRate(omega);
+        setControl(request);
+    }
 }

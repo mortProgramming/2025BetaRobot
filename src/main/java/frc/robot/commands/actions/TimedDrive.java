@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Timer;
- 
+import frc.robot.RobotContainer;
 public class TimedDrive extends Command{
     private CommandSwerveDrivetrain drivetrain;
     private Timer timer;
@@ -22,9 +22,18 @@ public class TimedDrive extends Command{
         timer = new Timer();
         addRequirements(drivetrain);
     }
+
+    public void execute(){
+        drivetrain.drive(x, y, omega);
+    }
     public void initialize(){
         timer.reset();
         timer.start();
     }
-
+    public void end(){
+        drivetrain.drive(0,0,0);
+    }
+    public boolean isFinished(){
+        return timer.get() > time;
+    }
 }

@@ -6,12 +6,15 @@ import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L3;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L4;
 import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.Coral;
+// import static frc.robot.subsystems.Elevator.positioncontroller.*;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class setElevator extends Command{
     private Elevator elevator;
     private double targetPosition;
+    private PIDController positioncontroller = new PIDController(0., 0, 0);
     public setElevator(double targetPosition){
         elevator = Elevator.getInstance();
         this.targetPosition = targetPosition;
@@ -23,6 +26,9 @@ public class setElevator extends Command{
     
     public void execute(){
         elevator.setPosition(-elevator.getPIDController().calculate(elevator.getPosition(), targetPosition));
+        // positioncontroller.setSetpoint(targetPosition);
+        // double speed=positioncontroller.calculate(elevator.getPosition());
+        // elevator.setSpeed(speed);
     }
     public boolean isFinished(){
         return false;
