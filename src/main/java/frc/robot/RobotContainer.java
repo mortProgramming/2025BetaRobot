@@ -26,6 +26,7 @@ import frc.robot.config.constants.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.commands.actions.jamElevator;
 import frc.robot.commands.actions.unJamElevator;
+import frc.robot.commands.actions.auton.OnePiece;
 import frc.robot.commands.actions.auton.Taxi;
 import frc.robot.commands.actions.openCoralGate;
 import frc.robot.commands.actions.TimedDrive;
@@ -125,6 +126,8 @@ public class RobotContainer {
 		autoChooser.setDefaultOption("nothing", null);
 		
 		autoChooser.addOption("Timed Taxi", new Taxi());
+
+        // autoChooser.addOption("One Piece", new OnePiece());
 
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
