@@ -112,7 +112,7 @@ public class Elevator extends SubsystemBase{
     }
     //Target position is in inches
     public void setElevatorPosition(double targetPosition){
-        // motorsSpeed= controller.calculate(targetPosition, getPosition()) + feedforward.calculate(getVelocity)
+        // motorsSpeed = controller.calculate(targetPosition, getPosition()) + feedforward.calculate(getVelocity)
     }
     public void periodic(){
         SmartDashboard.putNumber("Elevator Encoder", getPosition());
