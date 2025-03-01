@@ -21,7 +21,7 @@ public final class PhysicalConstants{
 		public static final double L1=0.1;
 		public static final double L2=0.1;
 		public static final double L3=0.1;
-		public static final double L4=0.1;
+		public static final double L4=30;
 		public static final double coral=0.1;
 		public static final double speedFactor=(0.45);
 	}

@@ -96,11 +96,12 @@ public class RobotContainer {
         new Trigger(() -> xboxController.getLeftY() < -0.05).whileTrue(new moveElevator(xboxController));
         
         xboxController.a().onTrue(setElevator.L4());
+        
         // xboxController.rightBumper().onTrue(new jamElevator());   
         // xboxController.leftBumper().onTrue(new unJamElevator()); 
         
         new Trigger (() -> xboxController.getRightTriggerAxis()>0.25).onTrue(new openCoralGate());
-        new Trigger(() -> xboxController.getLeftTriggerAxis()>0.25).onTrue(new closeCoralGate());  
+        new Trigger (() -> xboxController.getLeftTriggerAxis()>0.25).onTrue(new closeCoralGate());  
         //A,B,X, & Y used for setpositions for elevator & arm simultaniously
     }
 
