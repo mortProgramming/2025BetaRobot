@@ -15,21 +15,27 @@ public class TimedDrive extends Command{
     //Field orientated is not neccesary since auton will always start with the robot field orientated, according to Ms. Varner
     //X, Y, & Omega are the x, y, and angular velocities respectively
     public TimedDrive(double time, double x, double y, double omega){
+        
         this.time = time;
         this.x = x;
         this.y = y;
         this.omega = omega;
+
+        drivetrain = RobotContainer.getSwerveDrivetrain();
+
         timer = new Timer();
         addRequirements(drivetrain);
+    }
+
+    public void initialize(){
+        timer.reset();
+        timer.start();
     }
 
     public void execute(){
         drivetrain.drive(x, y, omega);
     }
-    public void initialize(){
-        timer.reset();
-        timer.start();
-    }
+
     public void end(){
         drivetrain.drive(0,0,0);
     }

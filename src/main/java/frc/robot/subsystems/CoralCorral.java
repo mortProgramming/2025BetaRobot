@@ -71,18 +71,7 @@ public class CoralCorral extends SubsystemBase  {
         return -6.274 * (getPosition() + 9.8);
     }
     public void setPosition(double setpoint){
-        double output = ((feedforward.calculate(0)+positionController.calculate(getPosition(), setpoint)) / MAX_VOLTAGE);
-        
-        if (output >= 1){
-            output=0.1;
-        }
-        else if (output <= -1){
-            output=-0.1;
-        }
-        
-        
-        // SmartDashboard.putNumber("Coral Corral Output", output);
-        driveNeoMaster.set(output);
+        driveNeoMaster.getEncoder().setPosition(setpoint);
     }
     public void setMotorPercent(double motorSpeed){
         this.motorSpeed=motorSpeed+KG;

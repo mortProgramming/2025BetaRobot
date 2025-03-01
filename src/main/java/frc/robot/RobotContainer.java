@@ -8,8 +8,12 @@ import static edu.wpi.first.units.Units.*;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -22,7 +26,9 @@ import frc.robot.config.constants.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.commands.actions.jamElevator;
 import frc.robot.commands.actions.unJamElevator;
+import frc.robot.commands.actions.auton.Taxi;
 import frc.robot.commands.actions.openCoralGate;
+import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.closeCoralGate;
 import frc.robot.commands.actions.setElevator; 
 import frc.robot.commands.actions.setCoralCorral;
@@ -42,10 +48,13 @@ public class RobotContainer {
     private static final CommandJoystick joystick = new CommandJoystick(0);
     private static CommandXboxController xboxController = new CommandXboxController(3);
 
-    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    public static final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+
+    private static SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
         configureBindings();
+        configureAuto();
     }
 
 
@@ -56,9 +65,9 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getY() * MaxSpeed * ((-joystick.getThrottle() + 1 ) / 2) + 0.05) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getX() * MaxSpeed * ((-joystick.getThrottle() + 1 ) / 2) + 0.05) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getTwist() * MaxAngularRate * ((-joystick.getThrottle() + 1 ) / 2) + 0.05) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(-joystick.getY() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive forward with negative Y (forward)
+                    .withVelocityY(-joystick.getX() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive left with negative X (left)
+                    .withRotationalRate(-joystick.getTwist() * MaxAngularRate * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive counterclockwise with negative X (left)
             )
         );
 
@@ -97,7 +106,7 @@ public class RobotContainer {
         new Trigger(() -> xboxController.getLeftY() < -0.05).whileTrue(new moveElevator(xboxController));
         
         xboxController.a().onTrue(setElevator.L4());
-        
+
         xboxController.x().onTrue(setCoralCorral.dump());
         xboxController.y().onTrue(setCoralCorral.intake());
 
@@ -110,8 +119,19 @@ public class RobotContainer {
         //A,B,X, & Y used for setpositions for elevator & arm simultaniously
     }
 
+    public void configureAuto() {
+        autoChooser = new SendableChooser<Command>();
+
+		autoChooser.setDefaultOption("nothing", null);
+		
+		autoChooser.addOption("Timed Taxi", new Taxi());
+
+		SmartDashboard.putData("Auton Chooser", autoChooser);
+    }
+
     public Command getAutonomousCommand() {
-        return Commands.print("No autonomous command configured");
+        // return Commands.print("No autonomous command configured");
+        return autoChooser.getSelected();
     }
 
     public static double getxboxRightJoy(){
@@ -121,13 +141,8 @@ public class RobotContainer {
     public static double getxboxLeftJoy(){
         return xboxController.getLeftY();
     }
+
+    public static CommandSwerveDrivetrain getSwerveDrivetrain() {
+        return drivetrain;
+    }
 }
-
-
-
-
-
-
-
-
-
