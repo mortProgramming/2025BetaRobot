@@ -299,4 +299,13 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             .withRotationalRate(omega);
         setControl(request);
     }
+
+    public void driveRelative(double x, double y, double omega) {
+        // Drive command without chassis speeds
+        SwerveRequest request = new SwerveRequest.RobotCentric()
+            .withVelocityX(x)
+            .withVelocityY(y)
+            .withRotationalRate(omega);
+        setControl(request);
+    }
 }
