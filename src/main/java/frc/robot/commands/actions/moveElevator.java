@@ -1,6 +1,7 @@
 package frc.robot.commands.actions;
 import frc.robot.subsystems.Elevator;
 
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.gravitySpeed;
 import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.speedFactor;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,7 +20,7 @@ public class moveElevator extends Command{
     }
 
     public void end(boolean interrupted){
-        elevator.setSpeed(0.35);
+        elevator.setMotorPercent(gravitySpeed);
     }
     
     public void execute(){

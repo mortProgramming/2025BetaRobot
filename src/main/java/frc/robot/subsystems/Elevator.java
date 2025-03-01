@@ -116,7 +116,7 @@ public class Elevator extends SubsystemBase{
     }
     public void periodic(){
         SmartDashboard.putNumber("Elevator Encoder", getPosition());
-        SmartDashboard.putNumber("elevator setpoint", setpoint);
+        SmartDashboard.putNumber("elevator Setpoint", setpoint);
         driveNeoMaster.setVoltage(motorSpeed*motorVoltage);
     }
     public static int getElevation(){

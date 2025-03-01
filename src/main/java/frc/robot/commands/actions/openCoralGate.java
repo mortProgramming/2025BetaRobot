@@ -16,10 +16,12 @@ public class openCoralGate extends Command{
     }
     public void execute(){
         servo.set(openSetpoint);
-        // System.out.println(servo.getAngle());
+        System.out.println(servo.get());
     }
 
-    public void end(boolean interrupted){}
+    public void end(boolean interrupted){
+        servo.set(openSetpoint);
+    }
     public boolean isFinished(){
         return false;
     }

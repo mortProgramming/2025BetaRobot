@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.config.constants.PIDConstants.CoralCorralPID.*;
 import static frc.robot.config.constants.PortConstants.CoralCorral.sparkMaxId;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.*;
-import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.MAX_VOLTAGE;
+
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -27,6 +27,7 @@ public class CoralCorral extends SubsystemBase  {
     private SparkMaxConfig driveConfigMaster;
     private ProfiledPIDController positionController;
     private double setpoint;
+    private double motorSpeed=0;
     private SimpleMotorFeedforward feedforward;
     public static int positionLevel=1; /*Not actual position, used for  set angles*/
     private CoralCorral(){
@@ -79,8 +80,12 @@ public class CoralCorral extends SubsystemBase  {
             output=-0.1;
         }
         
+        
         // SmartDashboard.putNumber("Coral Corral Output", output);
         driveNeoMaster.set(output);
+    }
+    public void setMotorPercent(double motorSpeed){
+        this.motorSpeed=motorSpeed+KG;
     }
     public void periodic(){
         SmartDashboard.putNumber("Coral Corral Position", getPosition());

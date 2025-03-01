@@ -25,6 +25,7 @@ import frc.robot.commands.actions.unJamElevator;
 import frc.robot.commands.actions.openCoralGate;
 import frc.robot.commands.actions.closeCoralGate;
 import frc.robot.commands.actions.setElevator; 
+import frc.robot.commands.actions.setCoralCorral;
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
@@ -55,9 +56,9 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getY() * MaxSpeed * ((-joystick.getThrottle() + 1 ) / 2)) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getX() * MaxSpeed * ((-joystick.getThrottle() + 1 ) / 2)) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getTwist() * MaxAngularRate * ((-joystick.getThrottle() + 1 ) / 2)) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(-joystick.getY() * MaxSpeed * ((-joystick.getThrottle() + 1 ) / 2) + 0.05) // Drive forward with negative Y (forward)
+                    .withVelocityY(-joystick.getX() * MaxSpeed * ((-joystick.getThrottle() + 1 ) / 2) + 0.05) // Drive left with negative X (left)
+                    .withRotationalRate(-joystick.getTwist() * MaxAngularRate * ((-joystick.getThrottle() + 1 ) / 2) + 0.05) // Drive counterclockwise with negative X (left)
             )
         );
 
@@ -97,11 +98,15 @@ public class RobotContainer {
         
         xboxController.a().onTrue(setElevator.L4());
         
+        xboxController.x().onTrue(setCoralCorral.dump());
+        xboxController.y().onTrue(setCoralCorral.intake());
+
+
         // xboxController.rightBumper().onTrue(new jamElevator());   
         // xboxController.leftBumper().onTrue(new unJamElevator()); 
         
-        new Trigger (() -> xboxController.getRightTriggerAxis()>0.25).onTrue(new openCoralGate());
-        new Trigger (() -> xboxController.getLeftTriggerAxis()>0.25).onTrue(new closeCoralGate());  
+        new Trigger (() -> xboxController.getRightTriggerAxis()>0.05).onTrue(new openCoralGate());
+        new Trigger (() -> xboxController.getLeftTriggerAxis()>0.05).onTrue(new closeCoralGate());  
         //A,B,X, & Y used for setpositions for elevator & arm simultaniously
     }
 

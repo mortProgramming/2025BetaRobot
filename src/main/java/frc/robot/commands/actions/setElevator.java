@@ -1,12 +1,13 @@
 package frc.robot.commands.actions;
 import frc.robot.subsystems.Elevator;
 
-import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L1;
-import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L2;
-import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L3;
-import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L4;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L1;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L2;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L3;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L4;
 import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.Coral;
 // import static frc.robot.subsystems.Elevator.positioncontroller.*;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.gravitySpeed;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,14 +29,14 @@ public class setElevator extends Command{
         // elevator.setPosition(-elevator.getPIDController().calculate(elevator.getPosition(), targetPosition));
         positioncontroller.setSetpoint(targetPosition);
         double speed = positioncontroller.calculate(elevator.getPosition());
-        elevator.setSpeed(speed*0.25);
-        // System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + elevator.getPosition());
+        elevator.setSpeed(speed*0.5);
+        System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + elevator.getPosition());
     }
     public boolean isFinished(){
         return false;
     }
     public void end(boolean interrupted){
-        elevator.setMotorPercent(0.3);
+        elevator.setMotorPercent(gravitySpeed);
     }
     public static Command L1(){
         return new setElevator(L1);

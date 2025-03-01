@@ -43,7 +43,7 @@ public final class PortConstants {
     public static final double TOP_LIMIT = 2;
   }
   public static final class Servo{
-    public static final int servoPort = 8;
+    public static final int servoPort = 7;
     public static final int servoPort2 = 9;
   }
   public static final class CoralCorral{
