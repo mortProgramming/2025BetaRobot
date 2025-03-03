@@ -13,12 +13,14 @@ public class unJamElevator extends Command{
         elevatorBrake = ElevatorBrake.getInstance();
         addRequirements(elevatorBrake);
     }
-    public void initialize(){
-        
+
+    public void initialize(){    
     }
+
     public void execute(){
         servo.set(unJamSetpoint);
     }
+    
     public void end(boolean interrupted){
     }
     

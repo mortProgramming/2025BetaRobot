@@ -76,15 +76,19 @@ public class Elevator extends SubsystemBase{
         
         setpoint = BOTTOM_LIMIT;
     }
+
     public void setSetpoint(double setpoint){
         this.setpoint=setpoint;
     }
+
     public double getSetpoint(){
         return setpoint;
     }
+
     public boolean atSetpoint(){
         return positionController.atSetpoint();
     }
+    
     public boolean nearSetpoint(){
         return Math.abs(driveNeoMaster.getEncoder().getPosition() - setpoint) < 10;
     }
@@ -95,33 +99,42 @@ public class Elevator extends SubsystemBase{
         }
         return elevator;
     }
+    
     public void setSpeed(double speed){
         driveNeoMaster.set(speed);
     }
+    
     public double getPosition(){
         return driveNeoMaster.getEncoder().getPosition();
     }
+    
     public ProfiledPIDController getPIDController(){
         return positionController;
     }
+    
     public void setPosition(double setpoint){
         driveNeoMaster.setVoltage(feedforward.calculate(0) + positionController.calculate(driveNeoMaster.getEncoder().getPosition(), setpoint));
     }
+    
     public void setMotorPercent(double motorSpeed){
         this.motorSpeed=motorSpeed+KG;
     }
+    
     //Target position is in inches
     public void setElevatorPosition(double targetPosition){
         // motorsSpeed = controller.calculate(targetPosition, getPosition()) + feedforward.calculate(getVelocity)
     }
+    
     public void periodic(){
         SmartDashboard.putNumber("Elevator Encoder", getPosition());
         SmartDashboard.putNumber("elevator Setpoint", setpoint);
         driveNeoMaster.setVoltage(motorSpeed*motorVoltage);
     }
+    
     public static int getElevation(){
         return elevation;
     }
+    
     public static void setElevation(int newElevation){
         elevation=newElevation;
     }

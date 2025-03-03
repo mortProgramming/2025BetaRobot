@@ -44,25 +44,32 @@ public class CoralCorral extends SubsystemBase  {
             public ProfiledPIDController getPositionController(){
         return positionController;
     }
+    
     public SparkMax getDriveNeoMaster(){
         return driveNeoMaster;
     }
+
     public void setSetpoint(double setpoint){
         this.setpoint = setpoint;
     }
+
     public double getSetpoint(){
         return setpoint;
     }
+
     public boolean atSetpoint(){
         return positionController.atSetpoint();
     }
+
     public void setSpeed(double speed){
         driveNeoMaster.set(speed);
         System.out.println("Speed: " + speed);
     }
+
     public boolean nearSetpoint(){
         return Math.abs(positionController.getPositionError()) < 0.1;
     }
+
     public double getPosition(){
         return driveNeoMaster.getEncoder().getPosition();
     }
@@ -70,27 +77,33 @@ public class CoralCorral extends SubsystemBase  {
     public double getPositionAngle(){
         return -6.274 * (getPosition() + 9.8);
     }
+
     public void setPosition(double setpoint){
         driveNeoMaster.getEncoder().setPosition(setpoint);
     }
+
     public void setMotorPercent(double motorSpeed){
         this.motorSpeed=motorSpeed+KG;
     }
+
     public void periodic(){
         SmartDashboard.putNumber("Coral Corral Position", getPosition());
         SmartDashboard.putNumber("Coral Corral Setpoint", setpoint);
         // driveNeoMaster.setVoltage(positionController.calculate(getPosition(), setpoint));
         // setPosition(setpoint);
     }
+
     public static CoralCorral getInstance(){
         if (coralCorral == null){
             coralCorral = new CoralCorral();
         }
         return coralCorral;
     }
+
     public static int getPositionLevel(){
         return positionLevel;
     }
+
     public static void setPositionLevel(int newPositionLevel){
         positionLevel = newPositionLevel;
     }

@@ -13,9 +13,11 @@ public class CoralGate extends SubsystemBase{
     public CoralGate(){
         servo=new Servo(servoPort);
     }
+    
     public void initialize(){
         coralGate = new CoralGate();
     }
+
     public static CoralGate getInstance(){
         if (coralGate == null){
             coralGate = new CoralGate();
@@ -23,15 +25,19 @@ public class CoralGate extends SubsystemBase{
         }
         return coralGate;
     }
+
     public void open(){
         servo.setPosition(openSetpoint);
     }
+
     public void close(){
         servo.setPosition(closedSetpoint);
     }
+
     public static boolean getIsClosed(){
         return isClosed;
     }
+
     public static void setIsClosed(boolean closed){
         isClosed=closed;
     }

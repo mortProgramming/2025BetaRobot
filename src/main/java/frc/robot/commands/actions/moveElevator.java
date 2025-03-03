@@ -15,8 +15,8 @@ public class moveElevator extends Command{
         this.xboxController=xboxController;
         addRequirements(elevator);
     }
-    public void initialize(){
 
+    public void initialize(){
     }
 
     public void end(boolean interrupted){
@@ -26,6 +26,7 @@ public class moveElevator extends Command{
     public void execute(){
         elevator.setSpeed(-xboxController.getLeftY()*speedFactor);
     }
+    
     public boolean isFinished(){
         return false;
     }

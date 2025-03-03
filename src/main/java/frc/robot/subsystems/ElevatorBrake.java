@@ -11,9 +11,11 @@ public class ElevatorBrake extends SubsystemBase{
     public ElevatorBrake(){
         servo=new Servo(servoPort2);
     }
+    
     public void initialize(){
         elevatorBrake = new ElevatorBrake();
     }
+
     public static ElevatorBrake getInstance(){
         if (elevatorBrake == null){
             elevatorBrake = new ElevatorBrake();
@@ -21,15 +23,19 @@ public class ElevatorBrake extends SubsystemBase{
         }
         return elevatorBrake;
     }
+
     public void jamElevator(){
         servo.setPosition(jamSetpoint);
     }
+
     public void unJamElevator(){
         servo.setPosition(unJamSetpoint);
     }
+
     public static boolean getIsJammed(){
         return isJammed;
     }
+
     public static void setIsJammed(boolean jammed){
         isJammed=jammed;
     }

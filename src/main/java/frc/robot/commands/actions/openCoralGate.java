@@ -12,8 +12,10 @@ public class openCoralGate extends Command{
         coralGate = CoralGate.getInstance();
         addRequirements(coralGate);
     }
+
     public void initialize(){
     }
+
     public void execute(){
         servo.set(openSetpoint);
         System.out.println(servo.get());
@@ -22,6 +24,7 @@ public class openCoralGate extends Command{
     public void end(boolean interrupted){
         servo.set(openSetpoint);
     }
+    
     public boolean isFinished(){
         return false;
     }

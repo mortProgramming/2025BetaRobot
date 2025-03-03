@@ -14,13 +14,15 @@ public class jamElevator extends Command{
         elevatorBrake = ElevatorBrake.getInstance();
         addRequirements(elevatorBrake);
     }
+    
     public void initialize(){
     }
+
     public void execute(){
         servo.set(jamSetpoint);
     }
-    public void end(boolean interrupted){
 
+    public void end(boolean interrupted){
     }
     
     public boolean isFinished(){
