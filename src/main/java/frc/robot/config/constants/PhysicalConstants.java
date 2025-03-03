@@ -6,9 +6,9 @@ public final class PhysicalConstants{
 	public final class ElevatorConstants{
 		public static final double ground=0;
 		public static final double L1=30;
-		public static final double L2=17;
-		public static final double L3=33.25;
-		public static final double L4=0;
+		public static final double L2=45;
+		public static final double L3=50;
+		public static final double L4=65;
 		public static final double Coral=0;
 		public static final double motorVoltage=12.0;
 		public static final double speedFactor = (0.5);
