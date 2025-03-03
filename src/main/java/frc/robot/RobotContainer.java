@@ -127,7 +127,7 @@ public class RobotContainer {
 		
 		autoChooser.addOption("Timed Taxi", new Taxi());
 
-        // autoChooser.addOption("One Piece", new OnePiece());
+        autoChooser.addOption("One Piece", new OnePiece());
 
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
