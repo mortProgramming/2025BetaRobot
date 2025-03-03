@@ -8,6 +8,7 @@ import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L4;
 import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.Coral;
 // import static frc.robot.subsystems.Elevator.positioncontroller.*;
 import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.gravitySpeed;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.ground;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -50,7 +51,7 @@ public class setElevator extends Command{
     public static Command L4(){
         return new setElevator(L4);
     }
-    public static Command LCoral(){
-        return new setElevator(Coral);
+    public static Command Ground(){
+        return new setElevator(ground);
     }
 }

@@ -4,7 +4,7 @@ import edu.wpi.first.math.util.Units;
 
 public final class PhysicalConstants{
 	public final class ElevatorConstants{
-		public static final double ground=0;
+		public static final double ground=4;
 		public static final double L1=30;
 		public static final double L2=45;
 		public static final double L3=50;
