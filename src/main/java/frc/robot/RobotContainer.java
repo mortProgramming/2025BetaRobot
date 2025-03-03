@@ -106,16 +106,14 @@ public class RobotContainer {
         new Trigger(() -> xboxController.getLeftY() > 0.05).whileTrue(new moveElevator(xboxController));
         new Trigger(() -> xboxController.getLeftY() < -0.05).whileTrue(new moveElevator(xboxController));
         
-        xboxController.pov(90).onTrue(setElevator.Ground());
-        xboxController.start().onTrue(setElevator.L1());
-
-        // xboxController.x().onTrue(setElevator.L2());
-        // xboxController.y().onTrue(setElevator.L3());
-        
+        xboxController.start().onTrue(setElevator.Ground());
+        xboxController.a().onTrue(setElevator.L1());
+        xboxController.x().onTrue(setElevator.L2());
+        xboxController.y().onTrue(setElevator.L3());
         xboxController.b().onTrue(setElevator.L4());
 
-        xboxController.x().onTrue(setCoralCorral.dump());
-        xboxController.y().onTrue(setCoralCorral.intake());
+        xboxController.pov(180).onTrue(setCoralCorral.dump());
+        xboxController.pov(0).onTrue(setCoralCorral.intake());
 
         // xboxController.pov(0).onTrue(setCoralCorral.dump());
         // xboxController.pov(180).onTrue(setCoralCorral.intake());
