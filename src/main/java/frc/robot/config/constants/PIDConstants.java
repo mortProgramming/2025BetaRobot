@@ -13,7 +13,7 @@ public final class PIDConstants {
 		public static final double KA = 0;			
 	}
 	public final class CoralCorralPID{
-		public static final double KP = 0.1;
+		public static final double KP = 0.04;
 		public static final double KI = 0.1;
 		public static final double KD = 0.1;
 		public static final double KS = 0.1;
