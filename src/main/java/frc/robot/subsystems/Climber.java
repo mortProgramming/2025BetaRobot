@@ -35,10 +35,10 @@ public class Climber extends SubsystemBase{
     public SparkMax getDriveNeoMaster(){
         return driveNeoMaster;
     }
-
+    
     public void setSpeed(double speed){
         driveNeoMaster.set(speed);
-        System.out.println("Speed: " + speed);
+        // System.out.println("Speed: " + speed);
     }
 
     public double getPosition(){
