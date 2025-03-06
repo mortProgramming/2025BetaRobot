@@ -24,8 +24,7 @@ import frc.robot.commands.actions.moveCoralCorral;
 import frc.robot.commands.actions.moveElevator;
 import frc.robot.config.constants.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.commands.actions.jamElevator;
-import frc.robot.commands.actions.unJamElevator;
+import frc.robot.commands.actions.moveClimber;
 import frc.robot.commands.actions.auton.OnePiece;
 import frc.robot.commands.actions.auton.Taxi;
 import frc.robot.commands.actions.openCoralGate;
@@ -118,8 +117,8 @@ public class RobotContainer {
         // xboxController.pov(0).onTrue(setCoralCorral.dump());
         // xboxController.pov(180).onTrue(setCoralCorral.intake());
 
-        xboxController.rightBumper().onTrue(new jamElevator());   
-        xboxController.leftBumper().onTrue(new unJamElevator()); 
+        xboxController.rightBumper().onTrue(new moveClimber(0.25));   
+        xboxController.leftBumper().onTrue(new moveClimber(-0.25)); 
         
         new Trigger (() -> xboxController.getRightTriggerAxis()>0.05).onTrue(new openCoralGate());
         new Trigger (() -> xboxController.getLeftTriggerAxis()>0.05).onTrue(new closeCoralGate());  

@@ -34,4 +34,8 @@ public final class PhysicalConstants{
 		public static double unJamSetpoint=0.01;
 		//Find openSetpoint 
 	}
+	public static final class climberConstants{
+		public static double climbSetpoint=0.5;
+		public static double descendSetpoint=0.01;
+	}
 }

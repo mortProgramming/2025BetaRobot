@@ -49,5 +49,9 @@ public final class PortConstants {
   }
   public static final class CoralCorral{
     public static final int sparkMaxId=9;
+
+  }
+  public static final class climberPorts{
+    public static final int sparkMaxId=0;
   }
 }
