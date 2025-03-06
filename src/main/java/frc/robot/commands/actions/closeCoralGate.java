@@ -24,7 +24,6 @@ public class closeCoralGate extends Command{
 
     public void end(boolean interrupted){
         servo.set(closedSetpoint);
-        // SmartDashboard.putNumber("Servo", servo.get());
     }
     
     public boolean isFinished(){
