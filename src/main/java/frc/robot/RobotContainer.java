@@ -127,13 +127,9 @@ public class RobotContainer {
 
     public void configureAuto() {
         autoChooser = new SendableChooser<Command>();
-
 		autoChooser.setDefaultOption("nothing", null);
-		
 		autoChooser.addOption("Timed Taxi", new Taxi());
-
         autoChooser.addOption("One Piece", new OnePiece());
-
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
 

@@ -30,12 +30,8 @@ public class Climber extends SubsystemBase{
         SparkBase.ResetMode resetMode = ResetMode.kNoResetSafeParameters;
         SparkBase.PersistMode persistMode = PersistMode.kNoPersistParameters;
         driveNeoMaster.configure(driveConfigMaster, resetMode, persistMode);
-        
                 setpoint=descendSetpoint; 
             }
-
-            
-    
     public SparkMax getDriveNeoMaster(){
         return driveNeoMaster;
     }
