@@ -96,11 +96,9 @@ public class RobotContainer {
         //new Trigger(() -> xboxController.getRightY() < -0.25).whileTrue(new moveCoralCorral(0.75));
         //new Trigger(() -> xboxController.getRightY() < -0.05).whileTrue(new moveCoralCorral(xboxController.getRightY()));
 
-
         new Trigger(() -> xboxController.getRightY() > 0.05).whileTrue(new moveCoralCorral(xboxController));
         new Trigger(() -> xboxController.getRightY() < -0.05).whileTrue(new moveCoralCorral(xboxController));
         drivetrain.registerTelemetry(logger::telemeterize);
-        
 
         new Trigger(() -> xboxController.getLeftY() > 0.05).whileTrue(new moveElevator(xboxController));
         new Trigger(() -> xboxController.getLeftY() < -0.05).whileTrue(new moveElevator(xboxController));
