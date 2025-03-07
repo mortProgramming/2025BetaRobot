@@ -52,6 +52,6 @@ public final class PortConstants {
 
   }
   public static final class climberPorts{
-    public static final int sparkMaxId = 0;
+    public static final int sparkMaxId = 12;
   }
 }
