@@ -127,6 +127,7 @@ public class RobotContainer {
 		autoChooser.setDefaultOption("nothing", null);
 		autoChooser.addOption("Timed Taxi", new Taxi());
         autoChooser.addOption("One Piece", new OnePiece());
+        autoChooser.addOption("One Piece Diff Pos", new OnePiece());
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
 
