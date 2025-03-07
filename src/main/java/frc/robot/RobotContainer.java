@@ -120,9 +120,8 @@ public class RobotContainer {
         xboxController.rightBumper().onTrue(new moveClimber(0.25));   
         xboxController.leftBumper().onTrue(new moveClimber(-0.25)); 
         
-        new Trigger (() -> xboxController.getRightTriggerAxis()>0.05).onTrue(new openCoralGate());
-        new Trigger (() -> xboxController.getLeftTriggerAxis()>0.05).onTrue(new closeCoralGate());  
-        //A,B,X, & Y used for setpositions for elevator & arm simultaniously
+        new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).onTrue(new openCoralGate());
+        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).onTrue(new closeCoralGate());  
     }
 
     public void configureAuto() {
