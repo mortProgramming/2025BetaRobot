@@ -11,8 +11,8 @@ public final class PhysicalConstants{
 		public static final double L4=65;
 		public static final double Coral=0;
 		public static final double motorVoltage=12.0;
-		public static final double speedFactor = (0.5);
-		public static final double gravitySpeed = 0.05;
+		public static final double speedFactor=0.5;
+		public static final double gravitySpeed=0.075;
 
 	}
 	public static final class CoralCorralConstants{

@@ -22,7 +22,7 @@ public class moveCoralCorral extends Command {
     public void execute(){
         // coralCorral.setSetpoint(coralCorral.getSetpoint()+speed);
         coralCorral.setSpeed(xboxController.getRightY() * speedFactor);
-        System.out.println("speed" + speed + " Right Joystick: " + RobotContainer.getxboxRightJoy());
+        // System.out.println("speed" + speed + " Right Joystick: " + RobotContainer.getxboxRightJoy());
     }
 
     public void end(boolean interrupted){

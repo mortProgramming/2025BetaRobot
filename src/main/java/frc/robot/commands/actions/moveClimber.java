@@ -20,7 +20,7 @@ public class moveClimber extends Command{
     public void execute(){
         // climber.setSetpoint(climber.getSetpoint()+speed);
         climber.setSpeed(speed);
-        System.out.println("speed" + speed);
+        // System.out.println("speed" + speed);
     }
 
     public void end(boolean interrupted){

@@ -57,16 +57,17 @@ public class Elevator extends SubsystemBase{
         driveNeoFollower.configure(driveConfigureFollower, null, null); 
         driveNeoMaster.configure(driveConfigMaster, resetMode, persistMode);
         driveNeoFollower.configure(driveConfigureFollower, resetMode, persistMode);
-        // driveNeoMaster.restoreFactoryDefaults();
-        // driveNeoFollower.restoreFactoryDefaults();
 
-        // driveNeoMaster.setIdleMode(IdleMode.kBrake);
-		// driveNeoFollower.setIdleMode(IdleMode.kBrake);
+        //driveNeoMaster.restoreFactoryDefaults();
+        //driveNeoFollower.restoreFactoryDefaults();
+
+        //driveNeoMaster.setIdleMode(IdleMode.kBrake);
+		//driveNeoFollower.setIdleMode(IdleMode.kBrake);
         // //setIdleMode, SoftLimitDirection, & maybe follow seemingly removed between 2024 & 2025
-        // driveNeoMaster.setSoftLimit(SoftLimitDirection.kforward, BOTTOM_LIMIT);
-		// driveNeoMaster.enableSoftLimit(SoftLimitDirection.kForward, false); 
-		// driveNeoMaster.setSoftLimit(SoftLimitDirection.kReverse, TOP_LIMIT);
-		// driveNeoMaster.enableSoftLimit(SoftLimitDirection.kForward, false);   
+        //driveNeoMaster.setSoftLimit(SoftLimitDirection.kforward, BOTTOM_LIMIT);
+		//driveNeoMaster.enableSoftLimit(SoftLimitDirection.kForward, false); 
+		//driveNeoMaster.setSoftLimit(SoftLimitDirection.kReverse, TOP_LIMIT);
+		//driveNeoMaster.enableSoftLimit(SoftLimitDirection.kForward, false);   
                  
         //driveNeoMaster.setsoftLimit(20);
 

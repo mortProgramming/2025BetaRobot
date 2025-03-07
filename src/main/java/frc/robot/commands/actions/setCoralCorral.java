@@ -29,7 +29,7 @@ public class setCoralCorral extends Command{
         positioncontroller.setSetpoint(targetPosition);
         double speed = positioncontroller.calculate(coralCorral.getPosition());
         coralCorral.setSpeed(speed * 0.5);
-        System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + coralCorral.getPosition());
+        // System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + coralCorral.getPosition());
     }
     
     public boolean isFinished(){

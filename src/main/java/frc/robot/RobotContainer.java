@@ -117,8 +117,8 @@ public class RobotContainer {
         // xboxController.pov(0).onTrue(setCoralCorral.dump());
         // xboxController.pov(180).onTrue(setCoralCorral.intake());
 
-        xboxController.rightBumper().onTrue(new moveClimber(0.25));   
-        xboxController.leftBumper().onTrue(new moveClimber(-0.25)); 
+        xboxController.rightBumper().onTrue(new moveClimber(0.75));   
+        xboxController.leftBumper().onTrue(new moveClimber(-0.75)); 
         
         new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).onTrue(new openCoralGate());
         new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).onTrue(new closeCoralGate());  

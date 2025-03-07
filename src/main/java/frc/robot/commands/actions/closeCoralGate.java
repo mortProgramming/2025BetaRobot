@@ -19,7 +19,7 @@ public class closeCoralGate extends Command{
 
     public void execute(){
         servo.set(closedSetpoint);
-        System.out.println(servo.get());
+        // System.out.println(servo.get());
     }
 
     public void end(boolean interrupted){

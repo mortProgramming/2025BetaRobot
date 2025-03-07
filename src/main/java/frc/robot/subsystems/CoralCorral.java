@@ -63,7 +63,7 @@ public class CoralCorral extends SubsystemBase  {
 
     public void setSpeed(double speed){
         driveNeoMaster.set(speed);
-        System.out.println("Speed: " + speed);
+        // System.out.println("Speed: " + speed);
     }
 
     public boolean nearSetpoint(){
