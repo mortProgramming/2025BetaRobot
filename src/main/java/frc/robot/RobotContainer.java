@@ -25,6 +25,7 @@ import frc.robot.commands.actions.moveElevator;
 import frc.robot.config.constants.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.commands.actions.moveClimber;
+import frc.robot.commands.actions.auton.OnePieceBlue;
 import frc.robot.commands.actions.auton.OnePieceRed;
 import frc.robot.commands.actions.auton.OnePiecediffpos;
 import frc.robot.commands.actions.auton.Taxi;
@@ -129,7 +130,7 @@ public class RobotContainer {
 		autoChooser.addOption("Timed Taxi", new Taxi());
         autoChooser.addOption("One Piece Red", new OnePieceRed());
         autoChooser.addOption("One Piece Diff Pos", new OnePiecediffpos());
-        autoChooser.addOption("One Piece Blue", new OnePiecediffpos());
+        autoChooser.addOption("One Piece Blue", new OnePieceBlue());
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
 
