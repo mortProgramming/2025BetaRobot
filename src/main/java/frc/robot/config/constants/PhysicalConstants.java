@@ -28,8 +28,8 @@ public final class PhysicalConstants{
 		public static final double gravitySpeed=0.05;
 	}
 	public static final class servoConstants{
-		public static double closedSetpoint=0.75;  //X button
-		public static double openSetpoint=0.35;		//Y button
+		public static double closedSetpoint=0.95;  //X button
+		public static double openSetpoint=0.45;		//Y button
         public static double jamSetpoint=0.75;
 		public static double unJamSetpoint=0.01;
 		//Find openSetpoint 
