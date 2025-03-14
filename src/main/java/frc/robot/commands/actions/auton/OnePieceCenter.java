@@ -12,7 +12,7 @@ public class OnePieceCenter extends SequentialCommandGroup{
         addCommands(
             new SequentialCommandGroup(
                 //For setCoralCorral, 1 target position equals 0.037 on the absolute encoder
-                new TimedDrive(5,0.7,0,0).withTimeout(4),
+                new TimedDrive(2,1,0,0).withTimeout(2),
                 new TimedDrive(0,0,0,0).withTimeout(2),
                 // new TimedDrive(3,0,0,-0.5),
                 // new TimedDrive(4,0.6,0,0),
