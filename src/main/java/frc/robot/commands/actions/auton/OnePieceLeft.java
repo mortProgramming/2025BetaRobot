@@ -6,8 +6,8 @@ import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.openCoralGate;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
-public class OnePieceLeftL4 extends SequentialCommandGroup{
-    public OnePieceLeftL4(){
+public class OnePieceLeft extends SequentialCommandGroup{
+    public OnePieceLeft(){
         addCommands(
             new SequentialCommandGroup(
                 //This is meant to be on the relative left side of the barge, with the bottom left side of the robot's bumper touching the bottom right side of the middle pole of the barge

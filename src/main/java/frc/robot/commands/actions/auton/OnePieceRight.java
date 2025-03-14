@@ -1,13 +1,14 @@
 package frc.robot.commands.actions.auton;
-import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L1;
+import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L1;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.ground;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.openCoralGate;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
-public class OnePieceRedRight extends SequentialCommandGroup{
-    public OnePieceRedRight(){
+public class OnePieceRight extends SequentialCommandGroup{
+    public OnePieceRight(){
         addCommands(
             new SequentialCommandGroup(
                 new setCoralCorral(35).withTimeout(1),

@@ -22,8 +22,6 @@ public class OnePieceCenter extends SequentialCommandGroup{
                 // new setElevator(30).withTimeout(2)
                 //Drive away to score coral
                 //new TimedDrive(3,0.5,0,0).withTimeout(3),
-
-
                 // new setCoralCorral(0)
             ) 
         );
