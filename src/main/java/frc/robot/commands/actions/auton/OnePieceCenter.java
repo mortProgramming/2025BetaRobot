@@ -16,6 +16,7 @@ public class OnePieceCenter extends SequentialCommandGroup{
                 new TimedDrive(0,0,0,0).withTimeout(2),
                 // new TimedDrive(3,0,0,-0.5),
                 // new TimedDrive(4,0.6,0,0),
+                
                 new setElevator(L4).withTimeout(4),
                 new setCoralCorral(21).withTimeout(1),
                 new openCoralGate().withTimeout(3)
