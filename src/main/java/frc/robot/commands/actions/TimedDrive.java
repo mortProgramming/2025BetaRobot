@@ -33,11 +33,11 @@ public class TimedDrive extends Command{
     }
 
     public void execute(){
-        drivetrain.drive(x, y, omega);
+        drivetrain.driveRelative(x, y, omega);
     }
 
     public void end(){
-        drivetrain.drive(0,0,0);
+        drivetrain.driveRelative(0,0,0);
     }
     public boolean isFinished(){
         return timer.get() > time;

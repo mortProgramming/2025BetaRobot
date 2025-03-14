@@ -9,7 +9,8 @@ public class Taxi extends SequentialCommandGroup{
     public Taxi(){
         addCommands(
             new SequentialCommandGroup(
-                new TimedDrive(3,0.5,0,0)
+                //new TimedDrive(3,0.5,0,0)
+                new TimedDrive(2.5,0,0,1.5708)
             ) 
         );
     }

@@ -22,10 +22,14 @@ public final class PhysicalConstants{
     	public static final double MAX_VOLTAGE=12.0;
 		public static final double L1=0.1;
 		public static final double L2_3=25;
-		public static final double dump=22.5;
-		public static final double intake=60;
+		public static final double dump=35;
+		public static final double intake=100;
+		public static final double ground=13;
 		public static final double speedFactor= -0.45;
 		public static final double gravitySpeed=0.05;
+		public static final double MIN_POSITION=0;
+		public static final double MAX_POSITION=0.45;
+		
 	}
 	public static final class servoConstants{
 		public static double closedSetpoint=0.95;  //X button

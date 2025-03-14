@@ -16,14 +16,14 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import static frc.robot.config.constants.PhysicalConstants.climberConstants.*;
 import static frc.robot.config.constants.PortConstants.climberPorts.*;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 public class Climber extends SubsystemBase{
     private static Climber climber;
     private SparkMax driveNeoMaster;
     private SparkMaxConfig driveConfigMaster;
     private double setpoint;
     private double motorSpeed=0;
-    public static int positionLevel=1; /*Not actual position, used for  set angles*/
+    public DigitalInput digitalInput=new DigitalInput(DigitalInputID);
     private Climber(){
         driveNeoMaster = new SparkMax(sparkMaxId, MotorType.kBrushless);
         driveConfigMaster = new SparkMaxConfig();
@@ -37,8 +37,16 @@ public class Climber extends SubsystemBase{
     }
 
     public void setSpeed(double speed){
+        if (digitalInput.get()){
         driveNeoMaster.set(speed);
-        // System.out.println("Speed: " + speed);
+        }
+        else if(!digitalInput.get() && speed<0){
+            driveNeoMaster.set(speed);
+        }
+        else{
+            driveNeoMaster.set(0);
+        }
+        //When button is not pressed, .get returns false
     }
 
     public double getPosition(){

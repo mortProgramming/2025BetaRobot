@@ -5,6 +5,7 @@ import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L2_3;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L2_3;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dump;
+import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.ground;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.intake;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.gravitySpeed;
 
@@ -27,8 +28,8 @@ public class setCoralCorral extends Command{
     public void execute(){
         // coralCorral.setPosition(-coralCorral.getPIDController().calculate(coralCorral.getPosition(), targetPosition));
         positioncontroller.setSetpoint(targetPosition);
-        double speed = positioncontroller.calculate(coralCorral.getPosition());
-        coralCorral.setSpeed(speed * 0.5);
+        double speed = positioncontroller.calculate(coralCorral.getPositionEncode());
+        coralCorral.setSpeed(speed*.5);
         // System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + coralCorral.getPosition());
     }
     
@@ -56,5 +57,9 @@ public class setCoralCorral extends Command{
     }
     public static Command intake(){
         return new setCoralCorral(intake);
+    }
+
+    public static Command ground(){
+        return new setCoralCorral(ground);
     }
 }

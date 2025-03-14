@@ -25,8 +25,9 @@ import frc.robot.commands.actions.moveElevator;
 import frc.robot.config.constants.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.commands.actions.moveClimber;
-import frc.robot.commands.actions.auton.OnePieceBlue;
-import frc.robot.commands.actions.auton.OnePieceRed;
+import frc.robot.commands.actions.auton.OnePieceBlueRight;
+import frc.robot.commands.actions.auton.OnePieceRedRight;
+import frc.robot.commands.actions.auton.OnePieceCenter;
 import frc.robot.commands.actions.auton.OnePiecediffpos;
 import frc.robot.commands.actions.auton.Taxi;
 import frc.robot.commands.actions.openCoralGate;
@@ -84,9 +85,9 @@ public class RobotContainer {
         // joystick.trigger().whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
         // joystick.top().whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
         // joystick.trigger().whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
-
+        
         // reset the field-centric heading on left bumper press
-
+        
         // change to button on joystick
         joystick.trigger().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
         
@@ -113,12 +114,13 @@ public class RobotContainer {
 
         xboxController.pov(180).onTrue(setCoralCorral.dump());
         xboxController.pov(0).onTrue(setCoralCorral.intake());
+        xboxController.pov(90).onTrue(setCoralCorral.ground());
 
         // xboxController.pov(0).onTrue(setCoralCorral.dump());
         // xboxController.pov(180).onTrue(setCoralCorral.intake());
 
-        xboxController.rightBumper().onTrue(new moveClimber(0.75));   
-        xboxController.leftBumper().onTrue(new moveClimber(-0.75)); 
+        xboxController.rightBumper().whileTrue(new moveClimber(0.75));   
+        xboxController.leftBumper().whileTrue(new moveClimber(-0.75)); 
         
         new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).onTrue(new openCoralGate());
         new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).onTrue(new closeCoralGate());  
@@ -128,9 +130,9 @@ public class RobotContainer {
         autoChooser = new SendableChooser<Command>();
 		autoChooser.setDefaultOption("nothing", null);
 		autoChooser.addOption("Timed Taxi", new Taxi());
-        autoChooser.addOption("One Piece Red", new OnePieceRed());
-        autoChooser.addOption("One Piece Diff Pos", new OnePiecediffpos());
-        autoChooser.addOption("One Piece Blue", new OnePieceBlue());
+        autoChooser.addOption("One Piece Red Right", new OnePieceRedRight());
+        autoChooser.addOption("One Piece Red Center", new OnePieceCenter());
+        autoChooser.addOption("One Piece Blue Right", new OnePieceBlueRight());
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
 

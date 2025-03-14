@@ -62,8 +62,19 @@ public class CoralCorral extends SubsystemBase  {
     }
 
     public void setSpeed(double speed){
-        driveNeoMaster.set(speed);
-        // System.out.println("Speed: " + speed);
+        if (coralCorral.getPosition()>MIN_POSITION && coralCorral.getPosition()<MAX_POSITION){
+            driveNeoMaster.set(speed);
+        }
+        else if((coralCorral.getPosition()>MAX_POSITION && coralCorral.getPosition()<0.95) && speed<0){
+            driveNeoMaster.set(speed);
+        }
+        else if((coralCorral.getPosition()<MIN_POSITION || coralCorral.getPosition()>0.95) && speed>0){
+            driveNeoMaster.set(speed);
+        }
+        else{
+            driveNeoMaster.set(0);
+        }
+        
     }
 
     public boolean nearSetpoint(){
@@ -71,6 +82,9 @@ public class CoralCorral extends SubsystemBase  {
     }
 
     public double getPosition(){
+        return driveNeoMaster.getAbsoluteEncoder().getPosition();
+    }
+    public double getPositionEncode(){
         return driveNeoMaster.getEncoder().getPosition();
     }
 
@@ -89,6 +103,7 @@ public class CoralCorral extends SubsystemBase  {
     public void periodic(){
         SmartDashboard.putNumber("Coral Corral Position", getPosition());
         SmartDashboard.putNumber("Coral Corral Setpoint", setpoint);
+        SmartDashboard.putNumber("Coral Corral Relative Encoder", getPositionEncode());
         // driveNeoMaster.setVoltage(positionController.calculate(getPosition(), setpoint));
         // setPosition(setpoint);
     }

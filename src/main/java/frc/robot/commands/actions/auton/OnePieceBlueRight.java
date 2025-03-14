@@ -7,14 +7,14 @@ import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.openCoralGate;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
-public class OnePieceBlue extends SequentialCommandGroup{
-    public OnePieceBlue(){
+public class OnePieceBlueRight extends SequentialCommandGroup{
+    public OnePieceBlueRight(){
         addCommands(
             new SequentialCommandGroup(
                 new setCoralCorral(35).withTimeout(1),
-                new TimedDrive(3,-0.4,0,0),
-                new TimedDrive(3,0,0,0.5),
-                new TimedDrive(4,-0.6,0,0),
+                new TimedDrive(3,0.4,0,0),
+                new TimedDrive(3,0,0,-0.5),
+                new TimedDrive(4,0.6,0,0),
                 new setElevator(L1),
                 new openCoralGate(),
                 new setCoralCorral(0)
