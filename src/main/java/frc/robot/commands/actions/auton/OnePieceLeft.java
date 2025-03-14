@@ -21,6 +21,7 @@ public class OnePieceLeft extends SequentialCommandGroup{
                     new setElevator(L4).withTimeout(4),
                     new setCoralCorral(21).withTimeout(1)
                 ),
+                
                 new openCoralGate().withTimeout(3)
             ) 
         );
