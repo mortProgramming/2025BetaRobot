@@ -15,13 +15,14 @@ public class OnePieceCenterWorks extends SequentialCommandGroup{
         addCommands(
             new SequentialCommandGroup(
                 //For setCoralCorral, 1 target position equals 0.037 on the absolute encoder
-                new TimedDrive(3,0.7,0.1,0).withTimeout(3),
+                new TimedDrive(3,0.7,0.12,0).withTimeout(3),
                 new TimedDrive(0,0,0,0).withTimeout(1),
                 new ParallelCommandGroup(
                     new setElevator(L4).withTimeout(4)
                 ),
                 new setCoralCorral(28).withTimeout(1),
                 new openCoralGate().withTimeout(3)
+                // new setElevator(80).withTimeout(4)
             ) 
         );
     }

@@ -25,8 +25,8 @@ import frc.robot.commands.actions.moveElevator;
 import frc.robot.config.constants.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.commands.actions.moveClimber;
-import frc.robot.commands.actions.auton.OnePieceLeft;
-import frc.robot.commands.actions.auton.OnePieceCenter;
+// import frc.robot.commands.actions.auton.OnePieceLeft;
+// import frc.robot.commands.actions.auton.OnePieceCenter;
 import frc.robot.commands.actions.auton.OnePieceCenterWorks;
 import frc.robot.commands.actions.auton.Taxi;
 import frc.robot.commands.actions.openCoralGate;
@@ -122,15 +122,17 @@ public class RobotContainer {
         xboxController.leftBumper().whileTrue(new moveClimber(-0.75)); 
         
         new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).onTrue(new openCoralGate());
-        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).onTrue(new closeCoralGate());  
+        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).onTrue(new closeCoralGate()); 
+        // new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).onTrue(new moveCoralGate(0.5));
+        // new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).onTrue(new moveCoralGate(-0.5)); 
     }
 
     public void configureAuto() {
         autoChooser = new SendableChooser<Command>();
 		autoChooser.setDefaultOption("nothing", null);
 		autoChooser.addOption("Timed Taxi", new Taxi());
-        autoChooser.addOption("One Piece Left", new OnePieceLeft());
-        autoChooser.addOption("One Piece Center", new OnePieceCenter());
+        // autoChooser.addOption("One Piece Left", new OnePieceLeft());
+        // autoChooser.addOption("One Piece Center", new OnePieceCenter());
         autoChooser.addOption("One Piece Center Tested", new OnePieceCenterWorks());
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
