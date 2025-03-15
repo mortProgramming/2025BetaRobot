@@ -8,7 +8,7 @@ public final class PhysicalConstants{
 		public static final double L1=30;
 		public static final double L2=45;
 		public static final double L3=50;
-		public static final double L4=65;
+		public static final double L4=70;
 		public static final double Coral=0;
 		public static final double motorVoltage=12.0;
 		public static final double speedFactor=0.5;
@@ -22,8 +22,8 @@ public final class PhysicalConstants{
     	public static final double MAX_VOLTAGE=12.0;
 		public static final double L1=0.1;
 		public static final double L2_3=25;
-		public static final double dump=35;
-		public static final double intake=100;
+		public static final double dump=28;
+		public static final double intake=50;
 		public static final double ground=13;
 		public static final double speedFactor= -0.45;
 		public static final double gravitySpeed=0.05;

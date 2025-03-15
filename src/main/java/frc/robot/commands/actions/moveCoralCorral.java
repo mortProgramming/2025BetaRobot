@@ -12,7 +12,13 @@ public class moveCoralCorral extends Command {
     public moveCoralCorral(CommandXboxController xboxController){
         coralCorral = CoralCorral.getInstance();
         this.xboxController=xboxController;
+        //this.speed = speed;
+        addRequirements(coralCorral);
+    }
+    public moveCoralCorral(double speed){
+        coralCorral = CoralCorral.getInstance();
         this.speed = speed;
+        this.xboxController=null;
         addRequirements(coralCorral);
     }
 
@@ -20,9 +26,10 @@ public class moveCoralCorral extends Command {
     }
 
     public void execute(){
-        // coralCorral.setSetpoint(coralCorral.getSetpoint()+speed);
+        if (xboxController==null)
+            coralCorral.setSpeed(speed);
+        else
         coralCorral.setSpeed(xboxController.getRightY() * speedFactor);
-        // System.out.println("speed" + speed + " Right Joystick: " + RobotContainer.getxboxRightJoy());
     }
 
     public void end(boolean interrupted){
