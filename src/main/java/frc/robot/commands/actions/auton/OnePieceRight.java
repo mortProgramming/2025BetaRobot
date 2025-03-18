@@ -9,20 +9,16 @@ import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.openCoralGate;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
-public class OnePieceLeft extends SequentialCommandGroup{
-    public OnePieceLeft(){
+public class OnePieceRight extends SequentialCommandGroup{
+    public OnePieceRight(){
         addCommands(
             new SequentialCommandGroup(
-                // new ParallelCommandGroup(
-                //     new TimedDrive(3,3,2,0),
-                //     new TimedDrive(3,0,0,1),
-                // ).withTimeout(3),
-                new TimedDrive(3,0,0,1),
-                new TimedDive(3,3,2,0),
+                new TimedDrive(1,0,0,-2).withTimeout(1),
+                new TimedDrive(3,2,0,0).withTimeout(3),
                 new setElevator(L4).withTimeout(2),
-                new setCoralCorral(dump).withTimeout(4),
+                new setCoralCorral(dump).withTimeout(3),
                 new openCoralGate().withTimeout(3)
-            ) 
+            )
         );
     }
 }

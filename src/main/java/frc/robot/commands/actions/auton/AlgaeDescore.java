@@ -15,8 +15,7 @@ public class AlgaeDescore extends SequentialCommandGroup{
         addCommands(
             new SequentialCommandGroup(
                 new ParallelCommandGroup(
-                    new TimedDrive(3,3,2,0),
-                    new TimedDrive(3,0,0,1),
+                    new TimedDrive(3,3,2,1),
                     new setElevator(L3),
                     new setCoralCorral(intake)
                 ).withTimeout(3),

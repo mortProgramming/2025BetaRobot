@@ -25,30 +25,29 @@ public class OnePieceCenter extends SequentialCommandGroup{
                     new TimedDrive(0,0,0,0).withTimeout(1),
                     new setCoralCorral(28).withTimeout(1)
                 ),
+
                 new openCoralGate().withTimeout(2),
                 new moveCoralCorral(0.25).withTimeout(1),
-                //Scores First Piece
+
+
                 new ParallelCommandGroup(
                     new TimedDrive(1,0,3,0).withTimeout(1),
                     new setElevator(ground).withTimeout(2)
                 ),
                 
                 new ParallelCommandGroup(
-                    new TimedDrive(3,3,3,0).withTimeout(3),
-                    new TimedDrive(3,0,0,-0.5).withTimeout(3),
+                    new TimedDrive(3,3,3,-0.5).withTimeout(3),
                     new setCoralCorral(intake).withTimeout(3)
                 ),
+                
                 new TimedDrive(1,0,0,0).withTimeout(1),
+
                 new ParallelCommandGroup(
                     new closeCoralGate().withTimeout(2),
-                    new TimedDrive(2,-3,-3,0).withTimeout(2),
-                    new TimedDrive(2,0,0,1).withTimeout(2),
-                    new setElevator(L4).withTimeout(2.5)
+                    new TimedDrive(2,-3,-3,1).withTimeout(2),
+                    new setElevator(L4).withTimeout(2)
                 )
-
-
             ) 
         );
-            
     }
 }

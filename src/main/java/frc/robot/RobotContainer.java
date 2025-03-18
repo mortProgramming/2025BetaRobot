@@ -25,9 +25,12 @@ import frc.robot.commands.actions.moveElevator;
 import frc.robot.config.constants.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.commands.actions.moveClimber;
+import frc.robot.commands.actions.auton.AlgaeDescore;
+import frc.robot.commands.actions.auton.OnePieceCenter;
 // import frc.robot.commands.actions.auton.OnePieceLeft;
 // import frc.robot.commands.actions.auton.OnePieceCenter;
 import frc.robot.commands.actions.auton.OnePieceCenterWorks;
+import frc.robot.commands.actions.auton.OnePieceRight;
 import frc.robot.commands.actions.auton.Taxi;
 import frc.robot.commands.actions.openCoralGate;
 import frc.robot.commands.actions.TimedDrive;
@@ -131,8 +134,9 @@ public class RobotContainer {
         autoChooser = new SendableChooser<Command>();
 		autoChooser.setDefaultOption("nothing", null);
 		autoChooser.addOption("Timed Taxi", new Taxi());
-        // autoChooser.addOption("One Piece Left", new OnePieceLeft());
-        // autoChooser.addOption("One Piece Center", new OnePieceCenter());
+        autoChooser.addOption("One Piece Right", new OnePieceRight());
+        // autoChooser.addOption("AlgaeDescore", new AlgaeDescore());
+        autoChooser.addOption("One Piece Center", new OnePieceCenter());
         autoChooser.addOption("One Piece Center Tested", new OnePieceCenterWorks());
 		SmartDashboard.putData("Auton Chooser", autoChooser);
     }
