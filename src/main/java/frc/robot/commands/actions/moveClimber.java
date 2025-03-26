@@ -8,6 +8,7 @@ import frc.robot.subsystems.Climber;
 public class moveClimber extends Command{
     private Climber climber;
     private double speed;
+    
     public moveClimber(double speed){
         climber = Climber.getInstance();
         this.speed = speed;

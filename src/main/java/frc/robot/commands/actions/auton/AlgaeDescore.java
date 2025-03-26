@@ -5,7 +5,7 @@ import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.actions.TimedDrive;
-import frc.robot.commands.actions.openCoralGate;
+import frc.robot.commands.actions.moveCoralGate;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
 import frc.robot.commands.actions.moveCoralCorral;

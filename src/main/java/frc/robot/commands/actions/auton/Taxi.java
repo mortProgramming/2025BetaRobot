@@ -4,7 +4,7 @@ import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.actions.openCoralGate;
+import frc.robot.commands.actions.moveCoralGate;
 public class Taxi extends SequentialCommandGroup{
     public Taxi(){
         addCommands(

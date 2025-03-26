@@ -27,18 +27,23 @@ public class TimedDrive extends Command{
         addRequirements(drivetrain);
     }
 
+    @Override
     public void initialize(){
         timer.reset();
         timer.start();
     }
 
+    @Override
     public void execute(){
         drivetrain.driveRelative(x, y, omega);
     }
 
-    public void end(){
+    @Override
+    public void end(boolean interrupted){
         drivetrain.driveRelative(0,0,0);
     }
+
+    @Override
     public boolean isFinished(){
         return timer.get() > time;
     }

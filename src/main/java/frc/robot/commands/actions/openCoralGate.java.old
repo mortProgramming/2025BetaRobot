@@ -3,7 +3,7 @@ import frc.robot.subsystems.CoralGate;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import static frc.robot.config.constants.PhysicalConstants.servoConstants.openSetpoint;
-import static frc.robot.subsystems.CoralGate.servo;
+// import static frc.robot.subsystems.CoralGate.servo;
 
 public class openCoralGate extends Command{
 

@@ -7,8 +7,7 @@ import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L4;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.actions.TimedDrive;
-import frc.robot.commands.actions.closeCoralGate;
-import frc.robot.commands.actions.openCoralGate;
+import frc.robot.commands.actions.moveCoralGate;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
 import frc.robot.commands.actions.moveCoralCorral;
@@ -26,7 +25,7 @@ public class OnePieceCenter extends SequentialCommandGroup{
                     new setCoralCorral(28).withTimeout(1)
                 ),
 
-                new openCoralGate().withTimeout(2),
+                new moveCoralGate(1).withTimeout(2),
                 new moveCoralCorral(0.25).withTimeout(1),
 
 
@@ -43,7 +42,7 @@ public class OnePieceCenter extends SequentialCommandGroup{
                 new TimedDrive(1,0,0,0).withTimeout(1),
 
                 new ParallelCommandGroup(
-                    new closeCoralGate().withTimeout(2),
+                    new moveCoralGate(-1).withTimeout(2),
                     new TimedDrive(2,-3,-3,1).withTimeout(2),
                     new setElevator(L4).withTimeout(2)
                 )
