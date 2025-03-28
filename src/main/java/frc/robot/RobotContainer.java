@@ -131,8 +131,8 @@ public class RobotContainer {
         xboxController.rightBumper().whileTrue(new moveClimber(0.75));   
         xboxController.leftBumper().whileTrue(new moveClimber(-0.75)); 
         //Negative value for moveCoralGate expels corral. A positive value intakes corral
-        new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveCoralGate(-1));
-        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveCoralGate(1)); 
+        new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveCoralGate(-1*xboxController.getRightTriggerAxis()));
+        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveCoralGate(1*xboxController.getRightTriggerAxis())); 
     }
 
     public void configureAuto() {
