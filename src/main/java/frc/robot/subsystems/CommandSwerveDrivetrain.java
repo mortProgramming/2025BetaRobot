@@ -37,7 +37,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private static final double kSimLoopPeriod = 0.005; // 5 ms
     private Notifier m_simNotifier = null;
     private double m_lastSimTime;
-    private SwerveDriveOdometry odometry;
+    // private SwerveDriveOdometry odometry;
 
     /**
      * Returns the SwerveDriveKinematics object for this drivetrain.
@@ -328,10 +328,13 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             .withRotationalRate(omega);
         setControl(request);
     }
+
     public Pose2d getPose() {
         return new Pose2d(
-            odometry.getPoseMeters().getTranslation(),
-            odometry.getPoseMeters().getRotation().times(Math.PI / 180)
+            // odometry.getPoseMeters().getTranslation(),
+            // odometry.getPoseMeters().getRotation().times(Math.PI / 180)
+            this.getPose().getTranslation(),
+            this.getPose().getRotation().times(Math.PI / 180)
         );
     }
 }

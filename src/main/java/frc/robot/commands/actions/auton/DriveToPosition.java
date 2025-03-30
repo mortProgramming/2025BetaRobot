@@ -145,6 +145,7 @@ package frc.robot.commands.actions.auton;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class DriveToPosition extends Command {
@@ -159,8 +160,9 @@ public class DriveToPosition extends Command {
     private static final double POSITION_TOLERANCE = 0.05; // Meters
     private static final double ANGLE_TOLERANCE = 2.0; // Degrees
 
-    public DriveToPosition(CommandSwerveDrivetrain drivetrain, double wantedX, double wantedY, double wantedTheta) {
-        this.drivetrain = drivetrain;
+    public DriveToPosition(double wantedX, double wantedY, double wantedTheta) {
+        this.drivetrain = RobotContainer.getSwerveDrivetrain();
+
         this.wantedX = wantedX;
         this.wantedY = wantedY;
         this.wantedTheta = wantedTheta;
@@ -168,7 +170,8 @@ public class DriveToPosition extends Command {
         // Initialize PID controllers
         xController = new PIDController(1.0, 0.0, 0.0);
         yController = new PIDController(1.0, 0.0, 0.0);
-        thetaController = new PIDController(1.0, 0.0, 0.0);
+        thetaController = new PIDController(0.03, 0.0, 0.0);
+
         thetaController.enableContinuousInput(-180.0, 180.0);
 
         addRequirements(drivetrain);
@@ -183,7 +186,9 @@ public class DriveToPosition extends Command {
     public void execute() {
         double currentX = drivetrain.getPose().getX();
         double currentY = drivetrain.getPose().getY();
-        double currentTheta = drivetrain.getRotation2d().getDegrees();
+        double currentTheta = drivetrain.getPose().getRotation().getDegrees();
+
+        // drivetrain.getPose
 
         // Calculate PID outputs
         double xSpeed = xController.calculate(currentX, wantedX);
@@ -198,7 +203,7 @@ public class DriveToPosition extends Command {
         // Check if the robot is within the position and angle tolerances
         double currentX = drivetrain.getPose().getX();
         double currentY = drivetrain.getPose().getY();
-        double currentTheta = drivetrain.getRotation2d().getDegrees();
+        double currentTheta = drivetrain.getPose().getRotation().getDegrees();
         boolean positionReached = Math.abs(currentX - wantedX) < POSITION_TOLERANCE &&
                                   Math.abs(currentY - wantedY) < POSITION_TOLERANCE;
         boolean angleReached = Math.abs(currentTheta - wantedTheta) < ANGLE_TOLERANCE;
