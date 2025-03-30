@@ -14,6 +14,7 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,6 +25,12 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.config.constants.TunerConstants.TunerSwerveDrivetrain;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+// import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 
 /**
  * Class that extends the Phoenix 6 SwerveDrivetrain class and implements
@@ -33,6 +40,13 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private static final double kSimLoopPeriod = 0.005; // 5 ms
     private Notifier m_simNotifier = null;
     private double m_lastSimTime;
+    private SwerveDriveOdometry odometry;
+
+    /**
+     * Returns the current rotation of the gyro.
+     *
+     * @return The current rotation as a Rotation2d object.
+     */
 
     /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
     private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.kZero;
@@ -116,15 +130,17 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      * This constructs the underlying hardware devices, so users should not construct
      * the devices themselves. If they need the devices, they can access them through
      * getters in the classes.
-     *
+     * @param kinematics            The kinematics for the swerve drive
      * @param drivetrainConstants   Drivetrain-wide constants for the swerve drive
      * @param modules               Constants for each specific module
      */
     public CommandSwerveDrivetrain(
+        SwerveDriveKinematics kinematics,
         SwerveDrivetrainConstants drivetrainConstants,
         SwerveModuleConstants<?, ?, ?>... modules
     ) {
         super(drivetrainConstants, modules);
+        odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(0), );
         
         if (Utils.isSimulation()) {
             startSimThread();
@@ -307,5 +323,11 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             .withVelocityY(y)
             .withRotationalRate(omega);
         setControl(request);
+    }
+    public Pose2d getPose() {
+        return new Pose2d();
+    }
+    public Rotation2d getRotation2d() {
+        return getPose().getRotation();
     }
 }

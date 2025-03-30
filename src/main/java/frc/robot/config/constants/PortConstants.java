@@ -59,6 +59,6 @@ public final class PortConstants {
     public static final int sparkMaxId = 14;
   }
   public static final class Vision{
-    public static final int limelight = 0;
+    public static final String limelight = "limelight";
   }
 }
