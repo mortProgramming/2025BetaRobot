@@ -328,7 +328,10 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             .withRotationalRate(omega);
         setControl(request);
     }
-    // public Pose2d getPose() {
-    //     return odometry.getPoseMeters();
-    // }
+    public Pose2d getPose() {
+        return new Pose2d(
+            odometry.getPoseMeters().getTranslation(),
+            odometry.getPoseMeters().getRotation().times(Math.PI / 180)
+        );
+    }
 }
