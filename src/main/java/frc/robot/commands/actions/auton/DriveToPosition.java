@@ -166,21 +166,19 @@ public class DriveToPosition extends Command {
         this.wantedTheta = wantedTheta;
 
         // Initialize PID controllers
-        xController = new PIDController(1.0, 0.0, 0.0); // Tune these gains
-        yController = new PIDController(1.0, 0.0, 0.0); // Tune these gains
-        thetaController = new PIDController(1.0, 0.0, 0.0); // Tune these gains
-        thetaController.enableContinuousInput(-180.0, 180.0); // Handle angle wrapping
+        xController = new PIDController(1.0, 0.0, 0.0);
+        yController = new PIDController(1.0, 0.0, 0.0);
+        thetaController = new PIDController(1.0, 0.0, 0.0);
+        thetaController.enableContinuousInput(-180.0, 180.0);
 
         addRequirements(drivetrain);
     }
-
     @Override
     public void initialize() {
         xController.reset();
         yController.reset();
         thetaController.reset();
     }
-
     @Override
     public void execute() {
         double currentX = drivetrain.getPose().getX();
@@ -195,7 +193,6 @@ public class DriveToPosition extends Command {
         // Drive the robot
         drivetrain.driveRelative(xSpeed, ySpeed, omega);
     }
-
     @Override
     public boolean isFinished() {
         // Check if the robot is within the position and angle tolerances
@@ -207,7 +204,6 @@ public class DriveToPosition extends Command {
         boolean angleReached = Math.abs(currentTheta - wantedTheta) < ANGLE_TOLERANCE;
         return positionReached && angleReached;
     }
-
     @Override
     public void end(boolean interrupted) {
         // Stop the drivetrain
