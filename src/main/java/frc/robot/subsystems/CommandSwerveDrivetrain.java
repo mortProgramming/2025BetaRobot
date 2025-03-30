@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.config.constants.TunerConstants.TunerSwerveDrivetrain;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 // import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -41,6 +42,15 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private Notifier m_simNotifier = null;
     private double m_lastSimTime;
     private SwerveDriveOdometry odometry;
+
+    /**
+     * Returns the SwerveDriveKinematics object for this drivetrain.
+     *
+     * @return The SwerveDriveKinematics object.
+     */
+    private SwerveDriveKinematics getKinematics() {
+        return drivetrainConstants.getKinematics();
+    }
 
     /**
      * Returns the current rotation of the gyro.
@@ -131,7 +141,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      * the devices themselves. If they need the devices, they can access them through
      * getters in the classes.
      * @param kinematics            The kinematics for the swerve drive
-     * @param drivetrainConstants   Drivetrain-wide constants for the swerve drive
+        odometry = new SwerveDriveOdometry(getKinematics(), Rotation2d.fromDegrees(0), new Pose2d());
      * @param modules               Constants for each specific module
      */
     public CommandSwerveDrivetrain(
@@ -140,7 +150,7 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         SwerveModuleConstants<?, ?, ?>... modules
     ) {
         super(drivetrainConstants, modules);
-        odometry = new SwerveDriveOdometry(drivetrainConstatns, Rotation2d.fromDegrees(0), );
+        odometry = new SwerveDriveOdometry(drivetrainConstants.kinematics, Rotation2d.fromDegrees(0), new Pose2d());
         
         if (Utils.isSimulation()) {
             startSimThread();
