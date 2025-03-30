@@ -22,7 +22,7 @@ public class OnePieceRightTwoPiece extends SequentialCommandGroup{
                 //4
                 // new WaitCommand(3),
                 new ParallelCommandGroup(
-                    new TimedDrive(3.5,1,-0.50,-0.33).withTimeout(3.5),
+                    new TimedDrive(3.5,1,-0.52,-0.33).withTimeout(3.5),
                     new setElevator(L4).withTimeout(3.5),
                     new setCoralCorral(dump).withTimeout(3.5)
                 ),

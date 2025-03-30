@@ -58,4 +58,7 @@ public final class PortConstants {
   public static final class CoralGate{
     public static final int sparkMaxId = 14;
   }
+  public static final class Vision{
+    public static final int limelight = 0;
+  }
 }

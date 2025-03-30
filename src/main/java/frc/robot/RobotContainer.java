@@ -4,39 +4,37 @@
 
 package frc.robot;
 
-import static edu.wpi.first.units.Units.*;
+import static edu.wpi.first.units.Units.MetersPerSecond;
+import static edu.wpi.first.units.Units.RadiansPerSecond;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-import frc.robot.commands.actions.moveCoralCorral;
-import frc.robot.commands.actions.moveElevator;
-import frc.robot.config.constants.TunerConstants;
-import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.moveClimber;
-import frc.robot.commands.actions.auton.AlgaeDescore;
-import frc.robot.commands.actions.auton.OnePieceCenter;
+import frc.robot.commands.actions.moveCoralCorral;
+import frc.robot.commands.actions.moveCoralGate;
+import frc.robot.commands.actions.moveElevator;
+import frc.robot.commands.actions.setCoralCorral;
+import frc.robot.commands.actions.setElevator;
 // import frc.robot.commands.actions.auton.OnePieceLeft;
 // import frc.robot.commands.actions.auton.OnePieceCenter;
 import frc.robot.commands.actions.auton.OnePieceCenterWorks;
-import frc.robot.commands.actions.auton.OnePieceRight;
-import frc.robot.commands.actions.auton.Taxi;
-import frc.robot.commands.actions.moveCoralGate;
-import frc.robot.commands.actions.TimedDrive;
-import frc.robot.commands.actions.setElevator; 
-import frc.robot.commands.actions.setCoralCorral;
+import frc.robot.commands.actions.auton.OnePieceRightTest;
 import frc.robot.commands.actions.auton.OnePieceRightTwoPiece;
+import frc.robot.commands.actions.auton.Taxi;
+// import frc.robot.commands.actions.auton.Taxi;
+import frc.robot.config.constants.TunerConstants;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
@@ -52,11 +50,7 @@ public class RobotContainer {
 
     private static final CommandJoystick joystick = new CommandJoystick(0);
     private static CommandXboxController xboxController = new CommandXboxController(3);
-
     public static final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-
-
-
     private static SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
@@ -75,7 +69,7 @@ public class RobotContainer {
                 drive.withVelocityX(-joystick.getY() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive forward with negative Y (forward)
                     .withVelocityY(-joystick.getX() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive left with negative X (left)
                     .withRotationalRate(-joystick.getTwist() * MaxAngularRate * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive counterclockwise with negative X (left)
-            )
+                    )
         );
 
         // joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
@@ -124,28 +118,35 @@ public class RobotContainer {
         xboxController.b().onTrue(setElevator.L4());
         xboxController.b().onTrue(setCoralCorral.dump());
         
-        xboxController.pov(0).onTrue(setCoralCorral.intake());
+        xboxController.pov(0).onTrue(setCoralCorral.intakeCor());
+        xboxController.pov(270).onTrue(setElevator.Ground());
+        xboxController.pov(90).onTrue(setCoralCorral.intake());
         xboxController.pov(180).onTrue(setCoralCorral.dump());
         // xboxController.pov(90).onTrue(setCoralCorral.ground());
 
         xboxController.rightBumper().whileTrue(new moveClimber(0.75));   
         xboxController.leftBumper().whileTrue(new moveClimber(-0.75)); 
         //Negative value for moveCoralGate expels corral. A positive value intakes corral
-        new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveCoralGate(-1*xboxController.getRightTriggerAxis()));
-        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveCoralGate(1*xboxController.getRightTriggerAxis())); 
+        // new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveCoralGate(-1*xboxController.getRightTriggerAxis()));
+        // new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveCoralGate(1*xboxController.getRightTriggerAxis())); 
+        new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveCoralGate(xboxController,false));
+        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveCoralGate(xboxController, true));
+
+        // xboxController.a().onTrue(new Taxi());
     }
 
     public void configureAuto() {
         autoChooser = new SendableChooser<Command>();
 		autoChooser.setDefaultOption("nothing", null);
 		autoChooser.addOption("Timed Taxi", new Taxi());
-        autoChooser.addOption("One Piece Right", new OnePieceRight());
+        autoChooser.addOption("One Piece Right Test", new OnePieceRightTest());
         autoChooser.addOption("Two Piece Right", new OnePieceRightTwoPiece());
         // autoChooser.addOption("AlgaeDescore", new AlgaeDescore());
-        autoChooser.addOption("One Piece Center", new OnePieceCenter());
+        // autoChooser.addOption("One Piece Center", new OnePieceCenter());
         autoChooser.addOption("One Piece Center Tested", new OnePieceCenterWorks());
-        autoChooser.addOption("One Piece Left", new OnePieceRightTwoPiece());
+        // autoChooser.addOption("One Piece Left", new OnePieceRightTwoPiece());
 		SmartDashboard.putData("Auton Chooser", autoChooser);
+        CameraServer.startAutomaticCapture("Main Camera",0);
     }
 
     public Command getAutonomousCommand() {
@@ -167,5 +168,6 @@ public class RobotContainer {
     public void periodic(){
         SmartDashboard.putNumber("Drive Speed", (-joystick.getY() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)));
         // SmartDashboard.putNumber("CoralGate Setpoint", );
+
     }
 }

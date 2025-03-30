@@ -4,7 +4,7 @@ import edu.wpi.first.math.util.Units;
 
 public final class PhysicalConstants{
 	public final class ElevatorConstants{
-		public static final double ground = 4;
+		public static final double ground = 2;
 		public static final double L1 = 6;
 		public static final double L2 = 18;
 		public static final double L3 = 35;
@@ -25,8 +25,8 @@ public final class PhysicalConstants{
 		public static final double dump = 30;
 		public static final double dumpL1 = 29;
 		public static final double dumpL4 = 31;
-		public static final double intake = 53;
-		public static final double intakeCor = 50;
+		public static final double intake = 50;
+		public static final double intakeCor = 36;
 		public static final double ground = 29;
 		public static final double speedFactor = -0.45;
 		public static final double gravitySpeed = 0.05;

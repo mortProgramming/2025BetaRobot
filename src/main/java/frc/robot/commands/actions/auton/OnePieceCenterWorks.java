@@ -2,7 +2,7 @@ package frc.robot.commands.actions.auton;
 
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dump;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.ground;
-import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dumpL4;
+// import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dump;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.intake;
 import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L1;
 import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.L4;
@@ -18,13 +18,13 @@ public class OnePieceCenterWorks extends SequentialCommandGroup{
     public OnePieceCenterWorks(){
         addCommands(
             new SequentialCommandGroup(
-                //For setCoralCorral, 1 target position equals 0.037 on the absolute encoder
+                // For setCoralCorral, 1 target position equals 0.037 on the absolute encoder
                 // new setCoralCorral(ground).withTimeout(3),
-                new TimedDrive(3,0.7,0.12,0).withTimeout(3),
+                new TimedDrive(3,0.7,0.1,0).withTimeout(3),
                 new TimedDrive(0,0,0,0).withTimeout(1),
                 // new ParallelCommandGroup(
-                    new setElevator(L4).withTimeout(4),
-                    new setCoralCorral(dumpL4).withTimeout(4),
+                new setElevator(L4).withTimeout(4),
+                new setCoralCorral(dump).withTimeout(4),
                 // ),
                 new moveCoralGate(-1).withTimeout(1),
                 new ParallelCommandGroup(

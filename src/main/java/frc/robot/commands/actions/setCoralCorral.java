@@ -9,6 +9,7 @@ import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dumpL4;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.ground;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.intake;
+import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.intakeCor;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.gravitySpeed;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -69,4 +70,8 @@ public class setCoralCorral extends Command{
     public static Command dumpL4(){
         return new setCoralCorral(dumpL4);
     }
+    public static Command intakeCor(){
+        return new setCoralCorral(intakeCor);
+    }
+    
 }
