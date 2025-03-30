@@ -135,12 +135,12 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      * @param modules               Constants for each specific module
      */
     public CommandSwerveDrivetrain(
-        SwerveDriveKinematics kinematics,
+        // SwerveDriveKinematics kinematics,
         SwerveDrivetrainConstants drivetrainConstants,
         SwerveModuleConstants<?, ?, ?>... modules
     ) {
         super(drivetrainConstants, modules);
-        odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(0), );
+        odometry = new SwerveDriveOdometry(drivetrainConstatns, Rotation2d.fromDegrees(0), );
         
         if (Utils.isSimulation()) {
             startSimThread();
@@ -323,11 +323,5 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             .withVelocityY(y)
             .withRotationalRate(omega);
         setControl(request);
-    }
-    public Pose2d getPose() {
-        return new Pose2d();
-    }
-    public Rotation2d getRotation2d() {
-        return getPose().getRotation();
     }
 }
