@@ -107,8 +107,7 @@ public class RobotContainer {
         
         xboxController.start().onTrue(setElevator.Ground());
 
-        xboxController.a().onTrue(setElevator.L1());
-        xboxController.a().onTrue(setCoralCorral.dumpL3());
+        xboxController.a().onTrue(setCoralCorral.intake());
 
         xboxController.x().onTrue(setElevator.L2());
         xboxController.x().onTrue(setCoralCorral.dump());
@@ -121,7 +120,7 @@ public class RobotContainer {
         
         // xboxController.pov(0).onTrue(setCoralCorral.intakeCor());
         // xboxController.pov(270).onTrue(setElevator.Ground());
-        xboxController.pov(0).onTrue(setCoralCorral.intake());
+        // xboxController.pov(0).onTrue(setCoralCorral.intake());
         xboxController.pov(180).onTrue(setCoralCorral.dump());
         // xboxController.pov(90).onTrue(setCoralCorral.ground());
 
