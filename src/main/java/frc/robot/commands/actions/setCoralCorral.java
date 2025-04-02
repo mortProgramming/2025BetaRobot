@@ -5,7 +5,8 @@ import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L2_3;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.L2_3;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dump;
-import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dumpL1;
+// import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dumpL1;
+import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dumpL3;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.dumpL4;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.ground;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.intake;
@@ -30,9 +31,11 @@ public class setCoralCorral extends Command{
     
     public void execute(){
         // coralCorral.setPosition(-coralCorral.getPIDController().calculate(coralCorral.getPosition(), targetPosition));
-        positioncontroller.setSetpoint(targetPosition);
-        double speed = positioncontroller.calculate((coralCorral.getPosition() * 100));
-        coralCorral.setSpeed(speed*0.5);
+        // positioncontroller.setSetpoint(targetPosition);
+        // double speed = positioncontroller.calculate((coralCorral.getPosition() * 100));
+        // coralCorral.setSpeed(speed*0.5);
+        coralCorral.setCorralPosition(targetPosition);
+
         // System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + coralCorral.getPosition());
     }
     
@@ -40,7 +43,7 @@ public class setCoralCorral extends Command{
         return false;
     }
     public void end(boolean interrupted){
-        coralCorral.setMotorPercent(gravitySpeed);
+        //coralCorral.setMotorPercent(gravitySpeed);
     }
 
     // public static Command L1(){
@@ -58,8 +61,8 @@ public class setCoralCorral extends Command{
     public static Command dump(){
         return new setCoralCorral(dump);
     }
-    public static Command dumpL1(){
-        return new setCoralCorral(dumpL1);
+    public static Command dumpL3(){
+        return new setCoralCorral(dumpL3);
     }
     public static Command intake(){
         return new setCoralCorral(intake);

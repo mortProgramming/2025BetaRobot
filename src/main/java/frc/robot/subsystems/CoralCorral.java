@@ -7,13 +7,17 @@ import static frc.robot.config.constants.PIDConstants.CoralCorralPID.*;
 import static frc.robot.config.constants.PortConstants.CoralCorral.sparkMaxId;
 import static frc.robot.config.constants.PhysicalConstants.CoralCorralConstants.*;
 
+import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
+
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,22 +30,38 @@ public class CoralCorral extends SubsystemBase  {
     private SparkMax driveNeoMaster;
     private SparkMaxConfig driveConfigMaster;
     private ProfiledPIDController positionController;
+    private SparkClosedLoopController pidController;
     private double setpoint;
     private double motorSpeed=0;
     private SimpleMotorFeedforward feedforward;
     public static int positionLevel=1; /*Not actual position, used for  set angles*/
+
     private CoralCorral(){
         driveNeoMaster = new SparkMax(sparkMaxId, MotorType.kBrushless);
         driveConfigMaster = new SparkMaxConfig();
         SparkBase.ResetMode resetMode = ResetMode.kNoResetSafeParameters;
         SparkBase.PersistMode persistMode = PersistMode.kNoPersistParameters;
+
+        driveConfigMaster.closedLoop
+                .p(KP)
+                .i(KI)
+                .d(KD)
+                .feedbackSensor(FeedbackSensor.kAbsoluteEncoder);
+            
+        driveConfigMaster.closedLoop.velocityFF(0);
+
+              
+
         driveNeoMaster.configure(driveConfigMaster, resetMode, persistMode);
-        positionController = new ProfiledPIDController(KP, KI, KD, CoralCorralConstants);
-                feedforward = new SimpleMotorFeedforward(KS, KG, KV, KA);
-                setpoint=REST_ANGLE; 
+
+        pidController = driveNeoMaster.getClosedLoopController();
+
+        // positionController = new ProfiledPIDController(KP, KI, KD, CoralCorralConstants);
+        //         feedforward = new SimpleMotorFeedforward(KS, KG, KV, KA);
+        //         setpoint=REST_ANGLE; 
             }
 
-            public ProfiledPIDController getPositionController(){
+    public ProfiledPIDController getPositionController(){
         return positionController;
     }
     
@@ -75,6 +95,9 @@ public class CoralCorral extends SubsystemBase  {
             driveNeoMaster.set(0);
         }
         
+    }
+    public void setCorralPosition(double targetPosition){
+        pidController.setReference(targetPosition, SparkMax.ControlType.kPosition, ClosedLoopSlot.kSlot0, 0);
     }
 
     public boolean nearSetpoint(){

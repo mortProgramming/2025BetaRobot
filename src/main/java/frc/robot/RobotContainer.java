@@ -41,7 +41,8 @@ public class RobotContainer {
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-            .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+            .withDeadband(MaxSpeed * 0.02).withRotationalDeadband(MaxAngularRate * 0.02) // Add a 10% deadband
+            // .withDeadband(MaxSpeed * (0.1 * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))).withRotationalDeadband(MaxAngularRate * (0.1 * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
@@ -107,20 +108,20 @@ public class RobotContainer {
         xboxController.start().onTrue(setElevator.Ground());
 
         xboxController.a().onTrue(setElevator.L1());
-        xboxController.a().onTrue(setCoralCorral.dumpL1());
+        xboxController.a().onTrue(setCoralCorral.dumpL3());
 
         xboxController.x().onTrue(setElevator.L2());
         xboxController.x().onTrue(setCoralCorral.dump());
 
         xboxController.y().onTrue(setElevator.L3());
-        xboxController.y().onTrue(setCoralCorral.dump());
+        xboxController.y().onTrue(setCoralCorral.dumpL3());
 
         xboxController.b().onTrue(setElevator.L4());
         xboxController.b().onTrue(setCoralCorral.dump());
         
-        xboxController.pov(0).onTrue(setCoralCorral.intakeCor());
-        xboxController.pov(270).onTrue(setElevator.Ground());
-        xboxController.pov(90).onTrue(setCoralCorral.intake());
+        // xboxController.pov(0).onTrue(setCoralCorral.intakeCor());
+        // xboxController.pov(270).onTrue(setElevator.Ground());
+        xboxController.pov(0).onTrue(setCoralCorral.intake());
         xboxController.pov(180).onTrue(setCoralCorral.dump());
         // xboxController.pov(90).onTrue(setCoralCorral.ground());
 

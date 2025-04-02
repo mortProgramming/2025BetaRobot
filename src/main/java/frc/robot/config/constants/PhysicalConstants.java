@@ -6,9 +6,9 @@ public final class PhysicalConstants{
 	public final class ElevatorConstants{
 		public static final double ground = 2;
 		public static final double L1 = 6;
-		public static final double L2 = 18;
+		public static final double L2 = 15;
 		public static final double L3 = 35;
-		public static final double L4 = 70;
+		public static final double L4 = 64;
 		public static final double Coral = 0;
 		public static final double motorVoltage = 12.0;
 		public static final double speedFactor = 0.75;
@@ -22,12 +22,12 @@ public final class PhysicalConstants{
     	public static final double MAX_VOLTAGE = 12.0;
 		public static final double L1 = 25;
 		public static final double L2_3 = 60;
-		public static final double dump = 30;
-		public static final double dumpL1 = 29;
-		public static final double dumpL4 = 31;
-		public static final double intake = 50;
-		public static final double intakeCor = 36;
-		public static final double ground = 29;
+		public static final double dump = 0.3;
+		public static final double dumpL3 = 0.33;
+		public static final double dumpL4 = 0.29;
+		public static final double intake = 0.5;
+		public static final double intakeCor = 0.3;
+		public static final double ground = 15;
 		public static final double speedFactor = -0.45;
 		public static final double gravitySpeed = 0.05;
 		public static final double MIN_POSITION = 0.25;
@@ -44,5 +44,9 @@ public final class PhysicalConstants{
 	public static final class climberConstants{
 		public static double climbSetpoint = 0.5;
 		public static double descendSetpoint = 0.01;
+	}
+	public static final class limeLightConstants{
+		public static double CAMERA_LEFT_OFFSET = 0.0;
+		public static double CAMERA_RIGHT_OFFSET = 0.0;
 	}
 }

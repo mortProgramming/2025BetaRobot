@@ -28,10 +28,11 @@ public class setElevator extends Command{
     
     public void execute(){
         // elevator.setPosition(-elevator.getPIDController().calculate(elevator.getPosition(), targetPosition));
-        positioncontroller.setSetpoint(targetPosition);
-        double speed = positioncontroller.calculate(elevator.getPosition());
-        elevator.setSpeed(speed * 0.5);
-        System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + elevator.getPosition());
+        // positioncontroller.setSetpoint(targetPosition);
+        // double speed = positioncontroller.calculate(elevator.getPosition());
+        // elevator.setSpeed(speed * 0.5);
+        elevator.setElevatorPosition(targetPosition);
+        // System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + elevator.getPosition());
     }
     public boolean isFinished(){
         return false;
