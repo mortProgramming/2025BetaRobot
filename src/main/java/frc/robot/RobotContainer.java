@@ -41,7 +41,7 @@ public class RobotContainer {
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-            .withDeadband(MaxSpeed * 0.02).withRotationalDeadband(MaxAngularRate * 0.02) // Add a 10% deadband
+            .withDeadband(MaxSpeed * 0.02).withRotationalDeadband(MaxAngularRate * 0.03) // Add a 10% deadband
             // .withDeadband(MaxSpeed * (0.1 * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))).withRotationalDeadband(MaxAngularRate * (0.1 * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
@@ -89,7 +89,8 @@ public class RobotContainer {
         
         // change to button on joystick
         joystick.trigger().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
-        
+
+        joystick.button(3).onTrue(drivetrain.driveLockCommand(0.001, 0.001, 0));
         //Left Joystick trigger should do seedFieldCentric
 
         //new Trigger(() -> xboxController.getRightY() > 0.25).whileTrue(new moveCoralCorral(-0.75));
@@ -105,9 +106,13 @@ public class RobotContainer {
         new Trigger(() -> xboxController.getLeftY() > 0.05).whileTrue(new moveElevator(xboxController));
         new Trigger(() -> xboxController.getLeftY() < -0.05).whileTrue(new moveElevator(xboxController));
         
-        xboxController.start().onTrue(setElevator.Ground());
+        // xboxController.start().onTrue(setElevator.Ground());
 
-        xboxController.a().onTrue(setCoralCorral.intake());
+        xboxController.pov(0).onTrue(setCoralCorral.intake());
+        xboxController.pov(0).onTrue(setElevator.Ground());
+
+        xboxController.a().onTrue(setCoralCorral.intakeCor());
+        xboxController.a().onTrue(setElevator.L4());
 
         xboxController.x().onTrue(setElevator.L2());
         xboxController.x().onTrue(setCoralCorral.dump());

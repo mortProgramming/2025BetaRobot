@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
-import com.ctre.phoenix6.swerve.SwerveModule;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
@@ -16,10 +15,8 @@ import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Notifier;
@@ -52,9 +49,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
      */
 
     /* Blue alliance sees forward as 0 degrees (toward red alliance wall) */
-    private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.kZero;
+    private static final Rotation2d kBlueAlliancePerspectiveRotation = Rotation2d.k180deg;
     /* Red alliance sees forward as 180 degrees (toward blue alliance wall) */
-    private static final Rotation2d kRedAlliancePerspectiveRotation = Rotation2d.kZero;
+    private static final Rotation2d kRedAlliancePerspectiveRotation = Rotation2d.k180deg;
     /* Keep track if we've ever applied the operator perspective before or not */
     private boolean m_hasAppliedOperatorPerspective = false;
 
@@ -331,13 +328,21 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     public Pose2d getPose() {
         return new Pose2d(
-            // odometry.getPoseMeters().getTranslation(),
-            // odometry.getPoseMeters().getRotation().times(Math.PI / 180)
             this.getPose().getTranslation(),
             this.getPose().getRotation().times(Math.PI / 180)
         );
     }
-    // public double getRotation2d(){
-    //     return Rotation2d.getDegrees();
-    // }
+    public void driveLock(double x, double y, double omega) {
+        // Drive command without chassis speeds
+        SwerveRequest request = new SwerveRequest.RobotCentric()
+            .withVelocityX(x)
+            .withVelocityY(y)
+            .withRotationalRate(omega);
+        setControl(request);
+    }
+    public Command driveLockCommand(double x, double y, int rotation) {
+        return runOnce(() -> {
+            driveLock(0.001, 0.001, 0);
+        });
+    }
 }

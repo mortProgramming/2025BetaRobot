@@ -54,6 +54,7 @@ public final class PortConstants {
   public static final class climberPorts{
     public static final int sparkMaxId = 12;
     public static final int DigitalInputID = 0;
+    public static final int DigitalInputID2 = 1;
   }
   public static final class CoralGate{
     public static final int sparkMaxId = 14;

@@ -24,6 +24,7 @@ public class Climber extends SubsystemBase{
     private double setpoint;
     private double motorSpeed=0;
     public DigitalInput digitalInput=new DigitalInput(DigitalInputID);
+    public DigitalInput digitalInput2=new DigitalInput(DigitalInputID2);
     private Climber(){
         driveNeoMaster = new SparkMax(sparkMaxId, MotorType.kBrushless);
         driveConfigMaster = new SparkMaxConfig();
@@ -37,16 +38,19 @@ public class Climber extends SubsystemBase{
     }
 
     public void setSpeed(double speed){
-        if (digitalInput.get()){
+        if (digitalInput.get() && digitalInput2.get()){
         driveNeoMaster.set(speed);
         }
-        else if(!digitalInput.get() && speed<0){
+        else if((!digitalInput.get() && speed<0) && digitalInput2.get()){
+            driveNeoMaster.set(speed);
+        }
+        else if ((!digitalInput2.get() && speed>0) && digitalInput.get()){
             driveNeoMaster.set(speed);
         }
         else{
             driveNeoMaster.set(0);
         }
-        //When button is not pressed, .get returns false
+        //When button is not pressed, .get returns true
     }
 
     public double getPosition(){

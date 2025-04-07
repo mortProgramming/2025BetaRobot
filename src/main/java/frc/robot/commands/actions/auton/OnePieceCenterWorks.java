@@ -29,7 +29,7 @@ public class OnePieceCenterWorks extends SequentialCommandGroup{
                 ),
                 new moveCoralGate(-1).withTimeout(1),
                 new ParallelCommandGroup(
-                new TimedDrive(3,-0.5,0,0).withTimeout(3),
+                new TimedDrive(2,-0.2,0,0).withTimeout(2),
                 new setElevator(2).withTimeout(3)
                 )
             ) 

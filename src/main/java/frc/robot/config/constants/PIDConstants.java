@@ -4,7 +4,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
 public final class PIDConstants {
     
 	public final class ElevatorPID{
-		public static final double KP = 0.2;
+		public static final double KP = 2;
 		public static final double KI = 0;
 		public static final double KD = 0;
 		public static final double KS = 0;

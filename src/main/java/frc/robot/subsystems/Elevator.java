@@ -7,24 +7,22 @@ import static frc.robot.config.constants.PIDConstants.ElevatorPID.KI;
 import static frc.robot.config.constants.PIDConstants.ElevatorPID.KP;
 import static frc.robot.config.constants.PIDConstants.ElevatorPID.KS;
 import static frc.robot.config.constants.PIDConstants.ElevatorPID.KV;
+import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.motorVoltage;
 import static frc.robot.config.constants.PortConstants.Elevator.BOTTOM_LIMIT;
 import static frc.robot.config.constants.PortConstants.Elevator.ELEVATOR_FOLLOWER;
 import static frc.robot.config.constants.PortConstants.Elevator.ELEVATOR_MASTER;
 import static frc.robot.config.constants.PortConstants.Elevator.MAX_ACCELERATION;
 import static frc.robot.config.constants.PortConstants.Elevator.MAX_VELOCITY;
-import static frc.robot.config.constants.PhysicalConstants.ElevatorConstants.motorVoltage;
+
+import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkBase;
-import com.revrobotics.spark.*;
-import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.ClosedLoopConfig;
-import com.revrobotics.spark.ClosedLoopSlot;
-import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.ClosedLoopSlot;
+
 import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
@@ -49,7 +47,6 @@ public class Elevator extends SubsystemBase{
         private Elevator(){
             driveNeoMaster = new SparkMax(ELEVATOR_MASTER, MotorType.kBrushless);
             driveNeoFollower = new SparkMax(ELEVATOR_FOLLOWER, MotorType.kBrushless);
-    
            
             driveConfigMaster = new SparkMaxConfig();
             driveConfigureFollower = new SparkMaxConfig();
@@ -57,23 +54,24 @@ public class Elevator extends SubsystemBase{
             SparkBase.ResetMode resetMode = ResetMode.kNoResetSafeParameters;
             SparkBase.PersistMode persistMode = PersistMode.kNoPersistParameters;
             //Why is driveNeoMaster.configure set to configure to the follower?
-    
             driveConfigMaster.closedLoop
                 .p(KP)
                 .i(KI)
                 .d(KD);
-            
-            driveConfigMaster.closedLoop.velocityFF(0);
 
-        driveConfigureFollower.follow(driveNeoMaster, true);
+            // driveConfigMaster.closedLoop.maxMotion
+            //     .maxVelocity(MAX_VELOCITY)
+            //     .maxAcceleration(MAX_ACCELERATION);
 
-        driveNeoFollower.configure(driveConfigureFollower, null, null); 
-        driveNeoMaster.configure(driveConfigMaster, resetMode, persistMode);
-        driveNeoFollower.configure(driveConfigureFollower, resetMode, persistMode);
+            driveConfigureFollower.follow(driveNeoMaster, true);
 
-        pidController = driveNeoMaster.getClosedLoopController();
+            driveNeoFollower.configure(driveConfigureFollower, null, null); 
+            driveNeoMaster.configure(driveConfigMaster, resetMode, persistMode);
+            driveNeoFollower.configure(driveConfigureFollower, resetMode, persistMode);
 
-        // Set PID gains
+            pidController = driveNeoMaster.getClosedLoopController();
+
+            // Set PID gains.
         
             // .outputRange(kMinOutput, kMaxOutput);
         
@@ -143,7 +141,7 @@ public class Elevator extends SubsystemBase{
     
     //Target position is in inches
     public void setElevatorPosition(double targetPosition){
-        pidController.setReference(targetPosition, SparkMax.ControlType.kPosition, ClosedLoopSlot.kSlot0, 0);
+        pidController.setReference(targetPosition, SparkMax.ControlType.kPosition, ClosedLoopSlot.kSlot0, -0.05);
     }
     
     public void periodic(){
