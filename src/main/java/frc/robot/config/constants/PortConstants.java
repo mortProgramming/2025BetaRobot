@@ -59,6 +59,14 @@ public final class PortConstants {
   public static final class CoralGate{
     public static final int sparkMaxId = 14;
   }
+  public static final class AlgaeGate{
+    public static final int sparkMaxId = 15;
+
+    public static AlgaeGate getInstance() {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+    }
+  }
   public static final class Vision{
     public static final String limelight = "limelight";
   }

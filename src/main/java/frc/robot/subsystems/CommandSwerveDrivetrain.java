@@ -10,6 +10,10 @@ import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
+import frc.robot.RobotContainer;
+import static edu.wpi.first.units.Units.MetersPerSecond;
+import static edu.wpi.first.units.Units.RadiansPerSecond;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -24,6 +28,7 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
+import frc.robot.config.constants.TunerConstants;
 import frc.robot.config.constants.TunerConstants.TunerSwerveDrivetrain;
 
 /**
@@ -340,9 +345,31 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             .withRotationalRate(omega);
         setControl(request);
     }
+
+    private final edu.wpi.first.wpilibj.Joystick joystick = new edu.wpi.first.wpilibj.Joystick(0);
+    private static final double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);;
+    private static final double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+    private final CommandSwerveDrivetrain drivetrain = this;
+
+    private void configureBindings() {
+        drivetrain.setDefaultCommand(
+            drivetrain.applyRequest(() ->
+                drive.withVelocityX(-joystick.getY() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive forward with negative Y (forward)
+                    .withVelocityY(-joystick.getX() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive left with negative X (left)
+                    .withRotationalRate(-joystick.getTwist() * MaxAngularRate * (((-joystick.getThrottle() + 1 ) / 2) + 0.1)) // Drive counterclockwise with negative X (left)
+                    )
+        );
+    }
+
     public Command driveLockCommand(double x, double y, int rotation) {
-        return runOnce(() -> {
-            driveLock(0.001, 0.001, 0);
+        return run(() -> {
+            if (joystick.getRawButton(3)) {
+            driveLock(x, y, rotation);
+            if(joystick.getRawButton(4)){
+            }
+            } else {
+            drive(0, 0, 0);
+            }
         });
     }
 }

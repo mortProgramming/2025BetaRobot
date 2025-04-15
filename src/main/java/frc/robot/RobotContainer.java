@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commands.actions.TimedDrive;
 import frc.robot.commands.actions.moveClimber;
 import frc.robot.commands.actions.moveCoralCorral;
 import frc.robot.commands.actions.moveCoralGate;
+import frc.robot.commands.actions.moveAlgaeGate;
 import frc.robot.commands.actions.moveElevator;
 import frc.robot.commands.actions.setCoralCorral;
 import frc.robot.commands.actions.setElevator;
@@ -90,14 +90,31 @@ public class RobotContainer {
         // change to button on joystick
         joystick.trigger().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
-        joystick.button(3).onTrue(drivetrain.driveLockCommand(0.001, 0.001, 0));
-        //Left Joystick trigger should do seedFieldCentric
+        joystick.button(5).onTrue(setCoralCorral.intake());
+        joystick.button(5).onTrue(setElevator.Ground());
 
-        //new Trigger(() -> xboxController.getRightY() > 0.25).whileTrue(new moveCoralCorral(-0.75));
-        //new Trigger(() -> xboxController.getRightY() > 0.05).whileTrue(new moveCoralCorral(xboxController.getRightY()));
-        //System.out.println("xbox: " + xboxController.getRightY());
-        //new Trigger(() -> xboxController.getRightY() < -0.25).whileTrue(new moveCoralCorral(0.75));
-        //new Trigger(() -> xboxController.getRightY() < -0.05).whileTrue(new moveCoralCorral(xboxController.getRightY()));
+        joystick.button(2).onTrue(drivetrain.applyRequest(() -> 
+        drive.withVelocityX(-joystick.getY() * (MaxSpeed * 1.5) * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))
+             .withVelocityY(-joystick.getX() * (MaxSpeed * 1.5) * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))
+             .withRotationalRate(-joystick.getTwist() * (MaxAngularRate * 1.5) * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))
+        ));
+
+        joystick.button(6).onTrue(setElevator.L4());
+        joystick.button(6).onTrue(setCoralCorral.dump());
+
+        joystick.button(3).onTrue(drivetrain.driveLockCommand(0.001, 0, 0));
+        joystick.button(11).onTrue(drivetrain.driveLockCommand(0, 0, 0));
+        joystick.button(7).onTrue(drivetrain.driveLockCommand(0.001, 0, 0));
+
+        joystick.pov(0).whileTrue(new moveCoralGate(0.75));
+        joystick.pov(90).onTrue(new moveCoralGate(1));
+        joystick.pov(180).whileTrue(new moveCoralGate(-0.75));
+
+        joystick.button(4).onTrue(drivetrain.applyRequest(() -> 
+            drive.withVelocityX(-joystick.getY() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))
+                 .withVelocityY(-joystick.getX() * MaxSpeed * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))
+                 .withRotationalRate(-joystick.getTwist() * MaxAngularRate * (((-joystick.getThrottle() + 1 ) / 2) + 0.1))
+        ));
 
         new Trigger(() -> xboxController.getRightY() > 0.05).whileTrue(new moveCoralCorral(xboxController));
         new Trigger(() -> xboxController.getRightY() < -0.05).whileTrue(new moveCoralCorral(xboxController));
@@ -110,6 +127,8 @@ public class RobotContainer {
 
         xboxController.pov(0).onTrue(setCoralCorral.intake());
         xboxController.pov(0).onTrue(setElevator.Ground());
+        
+        xboxController.pov(90).onTrue(new moveCoralGate(1));
 
         xboxController.a().onTrue(setCoralCorral.intakeCor());
         xboxController.a().onTrue(setElevator.L4());
@@ -126,15 +145,21 @@ public class RobotContainer {
         // xboxController.pov(0).onTrue(setCoralCorral.intakeCor());
         // xboxController.pov(270).onTrue(setElevator.Ground());
         // xboxController.pov(0).onTrue(setCoralCorral.intake());
-        xboxController.pov(180).onTrue(setCoralCorral.dump());
+        
+        xboxController.pov(180).onTrue(new moveCoralCorral(0.20));
+
         // xboxController.pov(90).onTrue(setCoralCorral.ground());
 
         xboxController.rightBumper().whileTrue(new moveClimber(0.75));   
-        xboxController.leftBumper().whileTrue(new moveClimber(-0.75)); 
+        xboxController.leftBumper().whileTrue(new moveClimber(-0.75));
+
         //Negative value for moveCoralGate expels corral. A positive value intakes corral
         // new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveCoralGate(-1*xboxController.getRightTriggerAxis()));
         // new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveCoralGate(1*xboxController.getRightTriggerAxis())); 
         new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveCoralGate(xboxController,false));
+        new Trigger (() -> xboxController.getRightTriggerAxis() > 0.05).whileTrue(new moveAlgaeGate(xboxController,false));
+
+        new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveAlgaeGate(xboxController, true));
         new Trigger (() -> xboxController.getLeftTriggerAxis() > 0.05).whileTrue(new moveCoralGate(xboxController, true));
 
         // xboxController.a().onTrue(new Taxi());

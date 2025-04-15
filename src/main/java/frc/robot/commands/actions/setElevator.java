@@ -32,6 +32,7 @@ public class setElevator extends Command{
         double speed = positioncontroller.calculate(elevator.getPosition());
         elevator.setSpeed(speed * 0.75);
         // elevator.setPosition(targetPosition);
+        
         // System.out.println("Speed: " + speed + " Target Position: " + targetPosition + " Encoder Position: " + elevator.getPosition());
     }
     public boolean isFinished(){
